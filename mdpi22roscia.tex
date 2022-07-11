@@ -1,0 +1,99 @@
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[journal,letterpaper]{IEEEtran}
+% include the list of acronyms, math commands and new commands used in this paper
+\input{includes/used_packages.tex}
+\input{includes/acronyms.tex}
+\input{includes/math_commands.tex}
+\input{includes/newcommands.tex}
+\hypersetup{draft}
+\makeglossaries
+
+\title{Reaction Wheels: Enhancing Aerial Maneuvers for
+	Legged Robots (Tentative)}
+\author{Andrea Cumerlotti$^{1, \, 2}$, Francesco Roscia$^{2, \, 3}$, Michele Focchi$^{2, \, 4}$, Andrea Del Prete$^{1}$ and Claudio Semini$^2$
+	\thanks{$^1$ Industrial Engineering Department (DII), University of Trento, Trento, Italy.
+		
+	$^2$ Dynamic Legged Systems (DLS) lab, Istituto Italiano di Tecnologia (IIT), Genoa, Italy.
+	
+	$^3$ Computer Science and Technology, Bioengineering, Robotics and Systems Engineering (DIBRIS), University of Genoa, Genoa, Italy.
+	
+	$^4$ Department of Information Engineering and Computer Science (DISI), University of Trento, Trento, Italy.
+
+}}
+
+
+\begin{document}
+\maketitle
+\thispagestyle{empty}
+\pagestyle{empty}
+
+\begin{abstract}%150-250 word abstract
+Aerial motions represent a challenge for quadrupedal robots. They become inevitable to overpass obstacles that cannot be circumvent with standard locomotion gaits. In these cases, the robot must perform a leap to position itself on the obstruction or even flyover it. In this work we propose an orientation control system consisting on a couple of rotating and actuated masses (named flywheels or reaction wheels) for the lightweight open-source robot Solo12. Because of the conservation of angular momentum, their rotation can be adjusted to steer the robot base orientation even when there are no contacts with the ground. The axes of rotation of the flywheels are designed to be incident, allowing us to have a compact orientation control system that is capable of controlling both roll and pitch angles of the platform considering the different moment of inertia in the two directions. We proof the concept with simulation and experiments on the real robot.
+\end{abstract}
+
+\begin{IEEEkeywords}
+	 
+\end{IEEEkeywords}
+
+\section{Introduction}\label{sec:introduction}
+Legged locomotion is designed for traversing rough terrain.
+Different types of gait, such as trot or crawl, have been developed to move quadrupedal robots. 
+Thanks to the progress of the last two decades, robots become lighter and able to generate higher torques and forces at the joints, enabling the possibility of doing highly dynamic maneuvers.
+Sometimes it is not possible to get around an obstacle with the gaits mentioned above, and jumps may be required. 
+
+When the robot is in air, the \acrfull{com} moves on the ballistic trajectory, that is completely defined by the lift-off position and velocity. On the other hand, the base orientation can be changed exploiting the conservation of the system angular momentum. This means that it is possible to control the base angular velocity by changing the inertia of the robot, e.g., changing the joints configuration. 
+
+Nevertheless, the majority of quadrupeds are designed to respect the massless leg assumption, resulting in limbs having small influence on the total angular momentum.
+
+
+\subsection{Related Work}
+Quadrupedal animals, like cats, can rearrange the tail and trunk to correct the orientation during a fall \cite{kane1969dynamical}.
+% Tail
+Many works use an additional link as a tail, like in \cite{chu2019null} and \cite{wenger2016frontal}.
+This link rotates around an axis that does not pass through the robot \acrshort{com}: the distances between the axis of rotation and the \acrshort{com} of both trunk and tail allow to obtain large effect on the total angular momentum even with a small tail mass.
+However, the placement of the additional link makes the resulting robot asymmetric. Moreover, due to its limited range of motion, a tail can be used only for a single jump, not for a repeated sequence \cite{johnson2012tail}.\annotation{Andrea me la spieghi?}
+
+% Legs reconfig
+It is possible to obtain a similar result by creating repetitive circular motions with the feet, like in \cite{hoffman2021exploiting} and \cite{kurtz2021mini}.
+
+In the latter, authors proposes special heavy boots for Mini Cheetah and use a neural network to calculate online joint trajectory. However, this solution unnecessarily increases the inertia of the legs, complicating the locomotion problem.\annotation{trova un modo per dire che questa complicazione è data dalla massless assumption che non è più valida} 
+
+% Gyros
+Another option is to use a \acrfull{cmg}.
+It consists of a wheel, spinning at a constant angular velocity inside two or three actuated gimbals.
+Tilting the wheel's axes of rotation generates the gyroscopic torque.
+This system is widespread in spacecrafts reorientation \cite{yoon2002spacecraft}, but less frequently exploited in robot locomotion, either wheeled \cite{brown1996single} or legged \cite{mikhalkov2021gyrubot}.
+The \acrshort{cmg} presents interesting capabilities, but the presence of a pan-tilt \annotation{Andrea mi spieghi che intendi} unit to the drive the gyroscope makes it impractical to mount it on a small, lightweight robot.
+
+% Reaction wheel
+Reaction wheels represent an additional option for controlling the robot orientation.
+Changing the angular velocity of a rotating mass attached to the trunk generates a torque that can reorient and stabilize the robot. Also this device is borrowed by spacecraft orientation \cite{oland2009reaction}, and it was sporadically investigated in legged locomotion, both for bipeds \cite{Brown2016}  \cite{xiong2020sequential} and quadrupeds \cite{kolvenbach2019towards}, \cite{vasilopoulos2016quadruped}.
+Compared with tails, reaction wheels do not have position limit, and since it rotates around its center of mass, its angular momentum results holonomic \cite{machairas2015quadruped}.\annotation{Andrea mi spieghi che intendi}
+To get a fast response, it is necessary to have an abrupt change in the reaction wheel angular velocity (angular acceleration).
+Using a brake avoids the employment of a motor able to deliver higher torques \cite{gajamohan2012cubli}, keeping the system compact: the motor speeds up slowly the reaction wheel, and when a reorientation is required, the break stops its spin.
+Since the effect of the break is unidirectional, it is possible to generate a rotation of the base only in the opposite direction of the reaction wheel angular velocity.
+
+\subsection{Proposed Approach and Contribution}
+In this work, we present an \acrlong{ocs} based on two flywheels, mounted on the trunk of the quadruped Solo12 \cite{grimminger2020open}. In order to control roll and pitch orientations with a compact device, the axes of rotation are set to be incident, creating an angle that balances the effect in both the directions. 
+Flywheels can correct orientation errors due to disturbances during the flight and inaccuracies in to the angular momentum achieved at the lift-off (e.g., given by tracking issues and non-idealities). 
+They enable the robot to land with a desired angular velocity (possibly zero) and orientation.
+In addition, they can enhance the landing phase by significantly reducing oscillations.  
+The presence of these additional joints, whose only function is to control the orientation, gives the possibility to relieve the effort of the legs.
+In more complex scenarios, like in a somersault, legs and flywheels can work in parallel to achieve a rotation angle larger than the one achievable only with legs (e.g., due to torque limitation).
+
+\subsection{Outline}
+% 
+
+\section{Background}
+
+
+\section{Conclusions}
+\label{sec:conclusion}
+
+\small
+\section*{Acknowledgements}	
+
+
+
+\printbibliography
+\end{document}
