@@ -10,15 +10,11 @@
 
 \title{Reaction Wheels: Enhancing Aerial Maneuvers for
 	Legged Robots (Tentative)}
-\author{Andrea Cumerlotti$^{1, \, 2}$, Francesco Roscia$^{2, \, 3}$, Michele Focchi$^{2, \, 4}$, Andrea Del Prete$^{1}$ and Claudio Semini$^2$
-	\thanks{$^1$ Industrial Engineering Department (DII), University of Trento, Trento, Italy.
-		
-	$^2$ Dynamic Legged Systems (DLS) lab, Istituto Italiano di Tecnologia (IIT), Genoa, Italy.
-	
-	$^3$ Computer Science and Technology, Bioengineering, Robotics and Systems Engineering (DIBRIS), University of Genoa, Genoa, Italy.
-	
-	$^4$ Department of Information Engineering and Computer Science (DISI), University of Trento, Trento, Italy.
-
+\author{
+	Francesco Roscia$^{1}$, Andrea Cumerlotti$^{1, \, 2}$, Andrea Del Prete$^{2}$, Claudio Semini$^{1}$, and Michele Focchi$^{1, \, 3}$
+	\thanks{$^1$ Dynamic Legged Systems (DLS) lab, Istituto Italiano di Tecnologia (IIT), Genoa, Italy.
+		$^2$ Industrial Engineering Department (DII), University of Trento, Trento, Italy.
+		$^3$ Department of Information Engineering and Computer Science (DISI), University of Trento, Trento, Italy.
 }}
 
 
@@ -45,7 +41,12 @@ When the robot is in air, the \acrfull{com} moves on the ballistic trajectory, t
 
 Nevertheless, the majority of quadrupeds are designed to respect the massless leg assumption, resulting in limbs having small influence on the total angular momentum.
 
-
+\begin{figure}[t!]
+	\centering
+	\includegraphics[width=.7\linewidth]{figures/solo_flywheels.png}
+	\caption{The \acrshort{ocs} design, having two flywheels with incident rotation axes (magari sostituire con foto)}
+	\label{fig:solo12flywheels}
+\end{figure} 
 \subsection{Related Work}
 Quadrupedal animals, like cats, can rearrange the tail and trunk to correct the orientation during a fall \cite{kane1969dynamical}.
 % Tail
@@ -74,7 +75,8 @@ Using a brake avoids the employment of a motor able to deliver higher torques \c
 Since the effect of the break is unidirectional, it is possible to generate a rotation of the base only in the opposite direction of the reaction wheel angular velocity.
 
 \subsection{Proposed Approach and Contribution}
-In this work, we present an \acrfull{ocs} based on two flywheels, mounted on the trunk of the quadruped Solo12 \cite{grimminger2020open}. In order to control roll and pitch orientations with a compact device, the axes of rotation are set to be incident, creating an angle that balances the effect in both the directions. 
+In this work, we present an \acrfull{ocs} based on two flywheels and mounted on the trunk of the quadruped Solo12 \cite{grimminger2020open}, see Fig. ref{fig:solo12flywheels}. In order to control roll and pitch orientations with a compact device, the axes of rotation are set to be incident, creating an angle that balances the effect in both the directions. 
+
 Flywheels can correct orientation errors due to disturbances during the flight and inaccuracies in to the angular momentum achieved at the lift-off (e.g., given by tracking issues and non-idealities). 
 They enable the robot to land with a desired angular velocity (possibly zero) and orientation.
 In addition, they can enhance the landing phase by significantly reducing oscillations.  
@@ -82,6 +84,7 @@ The presence of these additional joints, whose only function is to control the o
 In more complex scenarios, like for a somersault, legs and flywheels can work in parallel to achieve a rotation angle larger than the one achievable only with legs (e.g., due to torque limitation). Furthermore, the \acrshort{ocs} can also be exploited to stabilize dynamic gaits, compensating for trunks oscillation.
 
 \subsection{Outline}
+\lipsum[1]
 % 
 
 \section{Background}
@@ -99,179 +102,125 @@ Referring to legged robots, this condition occurs whether the system is not in c
 In the case, it is possible to change the angular velocity of the base, changing the joints velocities, as a result of the \textit{non-holonomy} of the angular momentum \cite{Wieber16}: if the angular momentum of a certain body changes, the one of the others must modify to maintain the total sum constant.
 
 \section{\acrshort{ocs} Design}
-We want to control simultaneously the robot roll and pitch orientation.
-To accomplish this task, the reaction wheels' contribution to the total angular momentum should lie on both $x$- and $y$-axes of the base frame, see Fig. \ref{fig:angVel}. 
-To remove unnecessary complications, we design two symmetrical modules. The axes of rotation of the left and right wheel, identified in the base reference frame with the unit vectors $\hat{\bm{a}}_l$ and $\hat{\bm{a}}_r$\annotation{$\hat{\bm{a}}$ sta per axis, se non ci piace si può trasformare in $\hat{\bm{c}}$}, are set to be incident, spanning a plane parallel to the $xy-$ plane of the base reference frame. We denote with $\alpha \leq \pi/2$ the non-negative angle between the wheels'axes of rotation and the robot lateral direction\annotation{I suggest to call $\alpha$ incident angle}. As long as the matrix
+In the following we present the limitations on the flywheels inertia selection and we show how exploit them to control simultaneously the robot roll and pitch orientation.
+\subsection{Inertia Selection}
+A preliminary analysis for the selection of the flywheels' inertia can be performed with the Elroy's Beanie model, depicted in Fig. \ref{fig:elroy-beanie}.
+\begin{figure}
+	\centering
+	\includegraphics[width=.7\linewidth]{figures/elroys-beanie.eps}
+	\caption{Schematic representation of the Elroy's Beanie model used for the preliminary analysis of the pitch motion.}
+	\label{fig:elroy-beanie}
+\end{figure} 
+This consists of two rigid bodies connected through their \acrshort{com} with a revolute joint. One of the bodies represents the robot in its nominal configuration. The other body models the \acrshort{ocs}. The aim is to examine the rotational dynamics of the system as a whole. To simplify the analysis, in the following we will refer only to the effects on the pitch angle of the robot, keeping in mind that the same arguments apply also for the roll. Let identify the moment of inertia of the robot in the nominal configuration as $I_r$ and the moment of inertia of the two flywheels as $I_f$, both expressed with respect of the system \acrshort{com}.
+The angular momentum $L$ of this system can be written as
+\begin{equation}\label{eq:ang_mom_elroy}
+L(t) = \left(I_r + I_{f}\right)\dot{\theta}(t) + I_{f}\dot{\gamma}(t)
+\end{equation}
+where $\dot{\theta}$ and $\dot{\gamma}$ are respectively to the pitch rate and angular velocity of the wheels. We want to drive the robot to a desired pitch rate $\dot{\theta}_{des}$ acting on the wheels velocity.
+Without loss of generalities, we can assume the reaction wheels stationary with the robot at the instant in which the reorientation maneuver starts ($\gamma_0 = 0$), having a system angular momentum of $L_0 = \left(I_r + I_{f}\right)\dot{\theta}_0$.
+Under the condition of conservation of the angular momentum, this quantity is constant over time and it is possible to estimate the lower bound for $I_{f}$ given a desired pitch rate and the maximum velocity of the flywheels $\dot{\gamma}_{max}$, that depends on the actuation limits:
 \begin{equation}
-	\bm{C} = 
-	\left[ \begin{array}{cc}
-	\hat{\bm{a}}_l & \hat{\bm{a}}_r
-	\end{array} \right] = 
-	\left[ \begin{array}{cc}
-	\sin(\alpha) & \sin(\alpha) \\
-	-\cos(\alpha) & \cos(\alpha) \\
-	0 & 0
-	\end{array} \right]
+I_{f} \geq \dfrac{\dot{\theta}_0-\dot{\theta}_{des}}{\dot{\theta}_{des}+\dot{\gamma}_{max}-\dot{\theta}_0}.
+\end{equation}
+Fig. \ref{fig:inertia_limits} reports the lower bound of $I_{f}$ for different initial and desired base angular velocities.
+\begin{figure}
+	\centering
+	\includegraphics[width=.7\linewidth]{figures/inertia_limits.eps}
+	\caption{Minimum inertia necessary to obtain the angular velocity $\dot{\theta}_{des}$ starting with different initial $\dot{\theta}_0$ conditions (questo plot va rifatto)}
+	\label{fig:inertia_limits}
+\end{figure}
+
+Once the desired inertia $I_f$ is chosen with the 2-D Elroy's Beanie model, it must be used to realize the 3-D object (Fig. \ref{fig:flywheel}). 
+\begin{figure}
+	\centering
+	\includegraphics[width=0.7\linewidth]{figures/flywheel.png}
+	\caption{The final design of the reaction wheel, shown together with its principal axes}
+	\label{fig:flywheel}
+\end{figure}
+We decided to realize the reaction wheels in the shape of hollow cylinders. This shape increases the inertia locating the mass far away from the rotation axis. The inertia tensor expressed in its principal axes, $\bm{I}_f = \mathrm{diag}\left\{ I_{f, xx}, \, I_{f, yy}, \, I_{f, zz}  \right\}$, depends on the cylinders inner and outer radii, $r$ and $R$, its height $h$ and the material density $\rho$:
+\begin{equation}
+	\begin{split}
+	I_{f, xx} = I_{f, yy} &= \frac{1}{12}\pi \rho h \left(3\left(r_2^4 - r_1^4\right) + h^2\left(r_2^2 - r_1^2\right)\right) \\
+	I_{f, zz} &= \frac{1}{2}\pi \rho h \left(r_2^4 - r_1^4\right)
+	\end{split}
+\end{equation}
+Notice that in the Elroy's Beanie model, there is a single body that models both the flywheels, thus one has to remember that $I_f = 2 \, I_{f, zz}$.
+The parameters $R$ and $h$ can be set to have a compact \acrshort{ocs} and $\rho$ depends on the chosen material, that is stainless steel in our case. The inner radius $r$ can be adjusted to obtain the desired inertia. Spokes with negligible mass connect the wheel to the motor shaft. All the parameters, together with the flywheels final inertia and mass are reported in Table \ref{tab:dim_fw}.
+\begin{table}
+	\centering
+	\begin{tabular}{ccc}
+		Parameter & Value & Unit \\
+		\hline
+		\hline
+		$r_1$ & $2.2\mathrm{e}-2$ & $\mathrm{m}$ \\
+		$r_2$ & $3.0\mathrm{e}-2$ & $\mathrm{m}$ \\
+		$h$   & $1.0\mathrm{e}-2$ & $\mathrm{m}$ \\
+		$\rho$   & $7860$ & $\mathrm{kg/m^3}$ \\
+		$m$   & $1.02\mathrm{e}-1$ & $\mathrm{kg}$ \\
+		$I_{xx}, I_{yy}$   & $3.79 \mathrm{e}-5$ & $\mathrm{kg \cdot m^2}$ \\
+		$I_{zz}$   & $6.92 \mathrm{e}-5$ & $ \mathrm{kg \cdot m^2}$ \\
+	\end{tabular}
+	\caption{Size and dynamic parameters of a single reaction wheel}
+	\label{tab:dim_fw}
+\end{table}
+
+\subsection{Flywheels Axes of Rotation}
+The orientation of the axis of rotation of each flywheel influences their contribution to the total angular momentum. To met the specification of controlling both the robot roll and pitch, the axes of rotation of the left and right wheel, identified in the base reference frame with the unit vectors $\hat{\bm{a}}_l$ and $\hat{\bm{a}}_r$\annotation{$\hat{\bm{a}}$ sta per axis, se non ci piace si può trasformare in $\hat{\bm{c}}$}, are set to be incident, spanning a plane parallel to the $xy-$ plane of the base reference frame see Fig. \ref{fig:angVel}. 
+To remove unnecessary complications, we design two symmetrical modules. We denote with $\alpha \leq \pi/2$ the non-negative angle between the wheels'axes of rotation and the robot lateral direction\annotation{I suggest to call $\alpha$ incident angle, if needed}. As long as the matrix
+\begin{equation}
+\bm{C} = 
+\left[ \begin{array}{cc}
+\hat{\bm{a}}_l & \hat{\bm{a}}_r
+\end{array} \right] = 
+\left[ \begin{array}{cc}
+\sin(\alpha) & \sin(\alpha) \\
+-\cos(\alpha) & \cos(\alpha) \\
+0 & 0
+\end{array} \right]
 \end{equation}
 is full column rank, it is possible to control both roll and pitch angles. If $\alpha = 0$, the roll results to be uncontrollable through the \acrshort{ocs}; otherwise, if $\alpha = \pi/2$, the pitch is not uncontrollable.
-%
-%\subsection{Inertia Selection}
-%n order to find the inertia necessary to comply with the requirements of the orientation control system, some analyses are performed with the “Elroy’s Beanie” shown in figure \ref{fig:elroy-beanie}.
-%This model consists of two bodies connected with a revolute joint on their Center of Mass (CoM).
-%One of the bodies represents the robot (inertia $I_r$), simplified as a single rigid body, and the other one the flywheel (inertia $I_{fw}$).
-%I perform the analysis for only one flywheel and only then extend the results to two bodies.
-%\begin{figure}[H] 
-%	\centering
-%	\includegraphics[height=5.9cm]{Images/Flywheel_System_Design/elroys-beanie.pdf}
-%	\caption{Schematic representation of the Elroy's Beanie model used for the preliminary analysis of the pitch motion.}
-%	\label{fig:elroy-beanie}
-%\end{figure}
-%\noindent
-%The angular momentum $L$ of this system can be written as
-%\begin{equation}\label{eq:ang_mom_elroy}
-%L = \left(I_r + I_{fw}\right)\dot{\theta} + I_{fw}\dot{\gamma}
-%\end{equation}
-%in which $I_r$ is the $I_{yy}$ component of the centroidal inertia matrix of the robot and $I_{fw}$ is composed by both the reaction wheels inertia of the along their axis of rotation, $\dot{\theta}$ and $\dot{\gamma}$ correspond respectively to the pitch-rate and angular speed of the wheels.
-%I employed the only the $I_{yy}$ component because, it gives the information about the pitch rotation.
-%The other elements of the tensor of inertia that affect the pitch, such as $I_{yx}$ and $I_{yz}$, are not considered since they are negligible with the respect to  $I_{yy}$.
-%Using the $I_{xx}$ component of the centroidal inertia matrix instead of the $I_{yy}$ allows us to perform the the same analysis as below for the roll rotation.
-%In this case, the variable $\theta$ should be substitute by $\phi$, the roll angle.
-%Under the condition of conservation of the angular momentum \ref{sec:cons_ang_mom} it is possible to estimate of the lower bound for $I_{fw}$ to get a desired angular velocity of the main body $\dot{\theta}_{des}$.
-%Assuming that at the lift-off the reaction wheels are not spinning ($\dot{\gamma}_{lo} = 0$), the angular momentum is $L_{lo} = \left(I_r + I_{fw}\right)\dot{\theta}_{lo}$, in which $\dot{\theta}_{lo}$ is the base pitch rate at lift-off. This value does not change for the whole duration of the flight.
-%The minimum inertia necessary to reach $\dot{\theta}_{des}$ is obtained when the flywheels rotate at their maximum speed. For higher inertia it is sufficient a smaller angular velocity:
-%\begin{equation}
-%I_{fw} = I_r \frac{\dot{\theta}_{lo} - \dot{\theta}_{des}}{\dot{\theta}_{des} + \dot{\gamma}_{max} - \dot{\theta}_{lo}} \ .
-%\end{equation}
-%The variable $\dot{\gamma}_{max}$ is the maximum motor speed that correspond to $5000 \ \mathrm{RPM}$ ( $523.6 \ \mathrm{rad/s}$).
-%In figure \ref{fig:pre_ana_kin} the results for different initial and desired angular velocities are reported.
-%It is evident that high inertia is required when the inertial and the desired angular velocity are opposite.
-%Usually, this condition is avoided thanks to a good thrusting phase.
-%\begin{figure}[H]
-%	\centering
-%	\includegraphics[width=0.7\textwidth]{Images/Flywheel_System_Design/Inertia_selection_by_kinematic_limits.eps}
-%	\caption{Minimum inertia necessary to obtain the angular velocity $\dot{\theta}_{des}$ starting with different lift-off $\dot{\theta}_{lo}$ conditions.}
-%	\label{fig:pre_ana_kin}
-%\end{figure}
-%
-%The kinematic model employed before has not considered the transient to reach the desired angular speed.
-%For this reason, the dynamical model of the "Elroy's Beanie" mechanism is derived.
-%The dynamics of this system is obtained with the Lagrangian method.
-%To calculate the Lagrangian $L$ it is necessary to compute the kinetic energy $K$ and the potential energy $U$.
-%In this quantities must be included also the translation part, therefore are used the masses of the bodies, $m_r$ and $m_{fw}$, and the position of the CoM, $x$ and $z$. 
-%\begin{equation*}
-%K = \frac{1}{2}\left(m_r + m_{fw}\right)\left(\dot{x}^2 + \dot{z}^2\right) + \frac{1}{2}I_r \dot{\theta}^2 + \frac{1}{2} I_{fw} \left(\dot{\theta} + \dot{\gamma}\right)^2
-%\end{equation*}
-%\begin{equation*}
-%U = \left(m_r + m_{fw}\right) g z 
-%\end{equation*}
-%\begin{equation}
-%\begin{split}\label{eq:lagrangian}
-%L &= K - U\\
-%&= \frac{1}{2}\left(m_r + m_{fw}\right)\left(\dot{x}^2 + \dot{z}^2\right) + \frac{1}{2}\left(I_r + I_{fw}\right)\dot{\theta}^2 + \frac{1}{2} I_{fw}\dot{\gamma}^2 + I_{fw} \dot{\theta}\dot{\gamma} - \left(m_r + m_{fw}\right) g z
-%\end{split}
-%\end{equation}
-%\begin{equation}\label{eq:LagToEqMo}
-%\frac{\partial L}{\partial \mathbf{q}} - \frac{d}{dt}\left(\frac{\partial L}{\partial \dot{\mathbf{q}}}\right) =  \boldsymbol{\tau}
-%\end{equation}
-%From the Lagrangian $L$ is possible to derive the equation of motion using \ref{eq:LagToEqMo}, in which $\mathbf{q} = \left[\begin{array}{cccc} x & z & \theta & \gamma \end{array}\right]^T$ are the generalized coordinates and $ \boldsymbol{\tau} $ are the generalized forces applied to the bodies.
-%In this particular case, it is analysed the flight phase in which are not applied external forces or torques, apart from the flywheels' ones.
-%Then we can set $\boldsymbol{\tau} = \left[\begin{array}{cccc} 0 & 0 & 0 & \tau_m \end{array}\right]^T$, in which $\tau_m$ is the direct-drive torque applied by the motor that control the flywheel.
-%The resulting equation of motion are
-%\begin{equation}\label{eq:EqOfMo}
-%\left[\begin{array}{cccc}
-%m_r + m_{fw} & 0 & 0 & 0\\
-%0 & m_r + m_{fw} & 0 & 0\\
-%0 & 0 & I_r+I_{fw} & I_{fw}\\
-%0 & 0 & I_{fw} & I_{fw} \\
-%\end{array}\right]
-%\left[\begin{array}{c}
-%\ddot{x} \\ \ddot{y} \\ \ddot{\theta} \\ \ddot{\phi} \\
-%\end{array}\right] + 
-%\left[\begin{array}{c}
-%0 \\ \left(m_r + m_{fw}\right) g \\ 0 \\ 0 \\
-%\end{array}\right] = 
-%\left[\begin{array}{c}
-%0 \\ 0 \\ 0 \\ \tau \\
-%\end{array}\right] \ .
-%\end{equation}
-%To obtain the values of $\mathbf{q}$, the differential equations are integrated using Runge-Kutta 4th order method.
-%From \ref{eq:EqOfMo}, we can see that the linear and the angular dynamic are decoupled.
-%The linear part, which corresponds to the well-known motion of a projectile, is used to calculate the time of flight.
-%I suppose that the robot lands on a flat surface at height zero.
-%The landing is estimated when the CoM reach the height of $0.23 \ \mathrm{m}$ (distance between CoM and ground in homing configuration) with a negative velocity.
-%This information is needed to understand the maximum time in which the reorientation maneuver must be concluded.
-%The linear dynamics can be neglected, imposing a fixed time constraint based on the specification of the duration of the flight phase to $1 \ \mathrm{s}$.
-%
-%The inertia of the reaction wheels can be chosen minimizing the work done by the motor to perform a reorientation maneuver. In particular, the task analyzed was a rotation of the main body of $30^\circ$ ($\simeq 0.5 \ \mathrm{rad}$) in the time  $t_f = 1 \ \mathrm{s}$.
-%A fifth-order polynomial generates the desired trajectory of the pitch of the robot that performs the rotation starting and finishing with zero angular velocity and acceleration.
-%In order to track the trajectory, we assume that we use a proportional and derivative (PD) controller.
-%The gains $k_p$ and $k_d$ are chosen to obtain a small settling time avoiding overshoots.
-%\begin{equation*}
-%\tau_m(t) = k_p \left(\theta_{des}(t) - \theta(t)\right) + k_d \left(\dot{\theta}_{des}(t) - \dot{\theta}(t)\right)
-%\end{equation*}
-%To select the inertia we intend to perform an optimization where we minimize the integral of the motor power absolute value, during the reorientation task.
-%The inertia $I_r$ affects the dynamics of the system and then modifies the evolution of $\tau_m(t)$ and $\dot{\gamma}(t)$ during the task.
-%\begin{equation*}
-%\min_{I_r} \int_{0}^{t_f} |\tau_m(t)\dot{\gamma}(t)| \,dt
-%\end{equation*}
-%In figure \ref{fig:inertia_vs_energy} are shown the values of the work done by the motors,for correcting both roll and pitch of Solo12. The dissipated energy is monotonically decreasing in the flywheel's inertia.
-%From the results, it is evident that there is not a local minimum and the optimal value for the inertia $I_{fw}$ is the greatest as possible.
-%\begin{figure}[H]
-%	\centering
-%	\includegraphics[height=6cm]{Images/Flywheel_System_Design/Inertia_vs_energy.eps}
-%	\caption{Work done by the motor $W_m$ using different values of inertia $I_{fw}$ for the reaction wheel  during a reorientation manoeuvrer of $30^\circ$ in $1s$.
-%		The $x$-axis is in logarithmic scale to show a wide spectrum of inertias.
-%		The results of the roll (in red) and pitch (in blue) are difference due to the different value of $I_r$, indeed the components of the centroidal inertia of the robot $I_{xx}$ and $I_{yy}$ are very different.}
-%	\label{fig:inertia_vs_energy}
-%\end{figure}
-%
-%\noindent
-%With the same analysis, I investigated whether the inclusion of a gearbox between the motor and the reaction wheel would bring some benefits.
-%The dynamical model is modified including the gearbox, with a gear reduction ratio $n$.
-%In this case, the motor angular velocity and the one of the reaction wheel are no more equal.
-%I continue to use $\gamma$ to define the motor angle, while the one of the flywheel is $\gamma / n$.
-%The torque applied at the reaction wheel is the torque of the motor magnified by a a factor $n$.
-%\begin{equation}\label{eq:EqOfMo_wGB}
-%\left[\begin{array}{cccc}
-%m_r + m_{fw} & 0 & 0 & 0\\
-%0 & m_r + m_{fw} & 0 & 0\\
-%0 & 0 & I_r+I_{fw} & I_{fw}/n\\
-%0 & 0 & I_{fw} & I_{fw}/n \\
-%\end{array}\right]
-%\left[\begin{array}{c}
-%\ddot{x} \\ \ddot{y} \\ \ddot{\theta} \\ \ddot{\gamma} \\
-%\end{array}\right] + 
-%\left[\begin{array}{c}
-%0 \\ \left(m_r + m_{fw}\right) g \\ 0 \\ 0 \\
-%\end{array}\right] = 
-%\left[\begin{array}{c}
-%0 \\ 0 \\ 0 \\ n\tau_m \\
-%\end{array}\right]
-%\end{equation}
-%The problem of minimization is modified including the gear reduction ratio as a decision variable.
-%\begin{equation}
-%\min_{I_r,\, n} \int_{0}^{t_f} |\tau_m(t)\dot{\gamma}(t)| \,dt
-%\end{equation}
-%The results, in figure \ref{fig:gearbox_vs_energy}, point out that the presence of a gearbox with a reduction ratio as great as possible results in a minimization of the energy used to perform the reorientation maneuvers.
-%The simulation of the task points out that adding the gearbox reduce the tracking error, but decrease of a factor $1/n$ the maximum speed of the motor.
-%I decide to maintain the value of $n = 1$ (without gearbox), to avoid the saturation of the motor velocity during a common task and because using a greater value do not comport a relevant decrease in energy.
-%\begin{figure}[H]
-%	\centering
-%	\includegraphics[height=6cm]{Images/Flywheel_System_Design/gearbox_vs_energy.eps}
-%	\caption{Work done by the motor $W_m$ using different values of reduction ratio $n$ for the reaction wheel  during a reorientation manoeuvrer of $30^\circ$ in $1s$.
-%		The $x$-axis is in logarithmic scale to show a wide spectrum of inertias.
-%		The results of the roll (in red) and pitch (in blue) are difference due to the different value of $I_r$, indeed the components of the centroidal inertia of the robot $I_{xx}$ and $I_{yy}$ are very different.}
-%	\label{fig:gearbox_vs_energy}
-%\end{figure}
-%\subsection{Incident Angle Selection}
-%
-%Let $\bm{I}^r = \mathrm{diag}{I^r_xx, \, I^r_yy, \, I^r_zz}$ be the inertia tensor of the robot in nominal configuration, expressed at its \acrshort{com}. The angle $\alpha$ that allows to maximize the joint contribution to the angular momentum on both the directions is 
+
 \begin{figure}
 	\centering
 	\includegraphics[width=0.7\linewidth]{figures/angular_velocities.eps}
 	\caption{Representation of the flywheels rotation axes, seen from the top of the robot}
 	\label{fig:angVel}
 \end{figure}
+\noindent With these considerations, the angular momentum produced by the left and right wheels expressed in the robot base frame is
+\begin{equation}
+\begin{split}
+\bm{L}_f &= \bm{L}_{fl} + \bm{L}_{fr} \\
+&=I_{f, zz} \, \bm{\omega}_{fl} + I_{f, zz} \, \bm{\omega}_{fl}\\
+&=I_{f, zz}
+\left[\begin{array}{c}
+ \left(\omega_{fl} +  \omega_{fr}\right)\sin(\alpha) \\ 
+ \left(\omega_{fl} -  \omega_{fl}\right)\cos(\alpha) \\
+ 0
+\end{array}\right]
+\end{split}
+\end{equation}
+in which $\bm{\omega}_{fl}= \omega_{fl} \, \hat{\bm{a}}_{l}$ and $\bm{\omega}_{fr}= \omega_{fr} \, \hat{\bm{a}}_{r}$ are the angular velocity vectors of the two wheels, and $\omega_{fl}$ and $\omega_{fr}$ is the speed delivered to each flywheel by its actuation system. The latter equation shows that the sum of the two angular speed impacts on roll rotations, while their difference can be used to adjust the pitch. Using the definition of $\bm{C}$, it rewrites as
+\begin{equation}
+\bm{L}_f = I_{f,zz}
+\left[
+\begin{array}{cc}
+\sin(\alpha) & \sin(\alpha) \\
+\cos(\alpha) & -\cos(\alpha) \\
+0 & 0
+\end{array}
+\right]
+\left[
+\begin{array}{cc}
+\omega_{fl} \\
+\omega_{fr}
+\end{array}
+\right] = I_{f,zz} \bm{C} \bm{u}
+\end{equation}
+in which $\bm{u}$ is the control input.
+\section{Simualtions and Experimental Results}
+
+
+
 \section{Conclusions}
 \label{sec:conclusion}
 
