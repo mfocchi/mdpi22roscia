@@ -1,5 +1,17 @@
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\documentclass[journal,letterpaper]{IEEEtran}
+\documentclass[letterpaper, 10 pt, conference]{ieeeconf}  % Comment this line out if you need a4paper
+
+%\documentclass[a4paper, 10pt, conference]{ieeeconf}      % Use this line for a4 paper
+
+\IEEEoverridecommandlockouts                              % This command is only needed if 
+% you want to use the \thanks command
+
+\overrideIEEEmargins                                      % Needed to meet printer requirements.
+
+
+
+
+%\documentclass[journal,letterpaper]{IEEEtran}
 % include the list of acronyms, math commands and new commands used in this paper
 \input{includes/used_packages.tex}
 \input{includes/acronyms.tex}
@@ -24,12 +36,12 @@
 \pagestyle{empty}
 
 \begin{abstract}%150-250 word abstract
-Aerial motions represent a challenge for quadrupedal robots. They become inevitable to overpass obstacles that cannot be circumvent with standard locomotion gaits. In these cases, the robot must perform a leap to position itself on the obstruction or even flyover it. In this work we propose an \acrfull{ocs} consisting on a couple of rotating and actuated masses (named flywheels or reaction wheels) for the lightweight open-source robot Solo12. Because of the conservation of angular momentum, their rotation can be adjusted to steer the robot base orientation even when there are no contacts with the ground. The axes of rotation of the flywheels are designed to be incident, allowing us to have a compact orientation control system that is capable of controlling both roll and pitch angles of the platform considering the different moment of inertia in the two directions. We proof the concept with simulation and experiments on the real robot.
+Aerial motions represent a challenge for quadrupedal robots. They become inevitable to overpass obstacles that cannot be circumvent with standard locomotion gaits. In these cases, the robot must perform a leap to position itself on the obstruction or even flyover it. In this work we propose an \gls{ocs} consisting on a couple of rotating and actuated masses (named flywheels or reaction wheels) for the lightweight open-source robot Solo12. Because of the conservation of angular momentum, their rotation can be adjusted to steer the robot base orientation even when there are no contacts with the ground. The axes of rotation of the flywheels are designed to be incident, allowing us to have a compact orientation control system that is capable of controlling both roll and pitch angles of the platform considering the different moment of inertia in the two directions. We proof the concept with simulation and experiments on the real robot.
 \end{abstract}
 
-\begin{IEEEkeywords}
+%\begin{IEEEkeywords}
 	 
-\end{IEEEkeywords}
+%\end{IEEEkeywords}
 
 \section{Introduction}\label{sec:introduction}
 Legged locomotion is designed for traversing rough terrain.
@@ -37,50 +49,50 @@ Different types of gait, such as trot or crawl, have been developed to move quad
 Thanks to the progress of the last two decades, robots become lighter and able to generate higher torques and forces at the joints, enabling the possibility of doing highly dynamic maneuvers.
 Sometimes it is not possible to get around an obstacle with the gaits mentioned above, and jumps may be required. 
 
-When the robot is in air, the \acrfull{com} moves on the ballistic trajectory, that is completely defined by the lift-off position and velocity. On the other hand, the base orientation can be changed exploiting the conservation of the system angular momentum. This means that it is possible to control the base angular velocity by changing the inertia of the robot, e.g., changing the joints configuration. 
+When the robot is in air, the \gls{com} moves on the ballistic trajectory, that is completely defined by the lift-off position and velocity. On the other hand, the base orientation can be changed exploiting the conservation of the system angular momentum. This means that it is possible to control the base angular velocity by changing the inertia of the robot, e.g., changing the joints configuration. 
 
 Nevertheless, the majority of quadrupeds are designed to respect the massless leg assumption, resulting in limbs having small influence on the total angular momentum.
 
 \begin{figure}[t!]
 	\centering
 	\includegraphics[width=.7\linewidth]{figures/solo_flywheels.png}
-	\caption{The \acrfull{ocs} design, having two flywheels with incident rotation axes (magari sostituire con foto)}
+	\caption{\small The \gls{ocs} design, having two flywheels with incident rotation axes (magari sostituire con foto)}
 	\label{fig:solo12flywheels}
 \end{figure} 
 \subsection{Related Work}
 Quadrupedal animals, like cats, can rearrange the tail and trunk to correct the orientation during a fall \cite{kane1969dynamical}.
 % Tail
 Many works use an additional link as a tail, like in \cite{chu2019null} and \cite{wenger2016frontal}.
-This link rotates around an axis that does not pass through the robot \acrshort{com}: the distances between the axis of rotation and the \acrshort{com} of both trunk and tail allow to obtain large effect on the total angular momentum even with a small tail mass.
+This link rotates around an axis that does not pass through the robot \gls{com}: the distances between the axis of rotation and the \gls{com} of both trunk and tail allow to obtain large effect on the total angular momentum even with a small tail mass.
 However, the placement of the additional link makes the resulting robot asymmetric. Moreover, due to its limited range of motion, a tail can be used only for a single jump, not for a repeated sequence \cite{johnson2012tail}.
 % Legs reconfig
 It is possible to obtain a similar result by creating repetitive circular motions with the feet, like in \cite{hoffman2021exploiting} and \cite{kurtz2021mini}. In the latter, authors proposes special heavy boots for Mini Cheetah and use a neural network to calculate online joint trajectory. However, this solution unnecessarily increases the inertia of the legs, complicating the locomotion problem.\annotation{trova un modo per dire che questa complicazione è data dalla massless assumption che non è più valida} 
 % Gyros
-Another option is to use a \acrfull{cmg}.
+Another option is to use a \gls{cmg}.
 It consists of a wheel, spinning at a constant angular velocity inside two or three actuated gimbals.
 Tilting the wheel's axes of rotation generates the gyroscopic torque.
 This system is widespread in spacecrafts reorientation \cite{yoon2002spacecraft}, but less frequently exploited in robot locomotion, either wheeled \cite{brown1996single} or legged \cite{mikhalkov2021gyrubot}.
-The \acrshort{cmg} presents interesting capabilities, but the presence of a pan-tilt unit to drive the gyroscope makes impractical to mount it on a small, lightweight robot.
+The \gls{cmg} presents interesting capabilities, but the presence of a pan-tilt unit to drive the gyroscope makes impractical to mount it on a small, lightweight robot.
 
 % Reaction wheel
 Reaction wheels represent an additional option for controlling the robot orientation.
 Changing the angular velocity of a rotating mass attached to the trunk generates a torque that can reorient the robot. Also this device is borrowed by spacecraft orientation \cite{oland2009reaction}, and it was sporadically investigated in legged locomotion for controlling only pitch orientation, both for bipeds \cite{Brown2016}, \cite{xiong2020sequential} and quadrupeds \cite{kolvenbach2019towards}, \cite{vasilopoulos2016quadruped}.
-Compared with tails, reaction wheels do not have position limit, and since their rotation axes pass though the \acrshort{com}, its angular momentum results holonomic \cite{machairas2015quadruped}.
+Compared with tails, reaction wheels do not have position limit, and since their rotation axes pass though the \gls{com}, its angular momentum results holonomic \cite{machairas2015quadruped}.
 To get a fast response, it is necessary to have an abrupt change in the reaction wheel angular velocity (angular acceleration).
 Using a brake avoids the employment of a motor able to deliver higher torques \cite{gajamohan2012cubli}, keeping the system compact: the motor slowly accelerates the wheel to a certain speed to store angular momentum and, when a reorientation is required, the break stops its spin.
 Since the effect of the break is unidirectional,
 a limitation of this approach is given by the fact that it is possible to generate a rotation of the base only in the opposite direction of the reaction wheel angular velocity.
 
 \subsection{Proposed Approach and Contribution}
-In this work, we present an \acrfull{ocs} based on two flywheels and mounted on the trunk of the quadruped Solo12 \cite{grimminger2020open}, see Fig. \ref{fig:solo12flywheels}. In order to control roll and pitch orientations with a compact device, the axes of rotation are set to be incident, creating an angle that balances the effect in both the directions. The benefits of the \acrshort{ocs} are the following.
+In this work, we present an \gls{ocs} based on two flywheels and mounted on the trunk of the quadruped Solo12 \cite{grimminger2020open}, see Fig. \ref{fig:solo12flywheels}. In order to control roll and pitch orientations with a compact device, the axes of rotation are set to be incident, creating an angle that balances the effect in both the directions. The benefits of the \gls{ocs} are the following.
 \begin{itemize}
 	\item Flywheels can correct orientation errors due to disturbances during the flight and inaccuracies in the angular momentum achieved at the lift-off (e.g., given by tracking issues and non-idealities). 
 	\item They enable the robot to land with a desired angular velocity (possibly zero) and orientation.
 	In addition, they can enhance the landing phase by significantly reducing oscillations.  
 	The presence of these additional joints, whose only function is to control the orientation, gives the possibility to relieve the effort of the legs.
-	\item In more complex scenarios, like for a somersault, limbs and \acrshort{ocs} can operate in parallel to achieve a rotation angle larger than the one achievable only with legs (e.g., due to torque limitation). 
+	\item In more complex scenarios, like for a somersault, limbs and \gls{ocs} can operate in parallel to achieve a rotation angle larger than the one achievable only with legs (e.g., due to torque limitation). 
 \end{itemize}
-Furthermore, the \acrshort{ocs} can also be exploited to stabilize dynamic gaits, compensating for trunk oscillations.
+Furthermore, the \gls{ocs} can also be exploited to stabilize dynamic gaits, compensating for trunk oscillations.
 
 
 \subsection{Outline}
@@ -88,7 +100,7 @@ Furthermore, the \acrshort{ocs} can also be exploited to stabilize dynamic gaits
 % 
 
 \section{Background}
-The starting point for any \acrshort{ocs} is the Euler's equation. For any mechanical system, the time derivative of the angular momentum computed with the respect of with a reference point $O$ fixed in an inertial frame equals
+The starting point for any \gls{ocs} is the Euler's equation. For any mechanical system, the time derivative of the angular momentum computed with the respect of with a reference point $O$ fixed in an inertial frame equals
 the resultant torque with respect to the same reference point:
 \begin{equation}
 	\dot{\bm{L}} = \sum_i \bm{M}_i
@@ -102,17 +114,17 @@ which is known as conservation of angular momentum.
 Referring to legged robots, this condition occurs whether the system is not in contact with the ground or other objects, e.g., during a fall or the flight phase of a jump.
 In the case, it is possible to change the angular velocity of this base, changing the joints velocities, as a result of the \textit{non-holonomy} of the angular momentum \cite{Wieber16}: if the angular momentum of a certain body changes, the one of the others must modify to maintain the total sum constant.
 
-\section{\acrlong{ocs}}
+\section{Orientation Control System}
 In the following we present a procedure for selecting the inertia of the flywheels and we show how exploit them to control simultaneously the robot roll and pitch orientation.
 \subsection{Inertia Selection}
 A preliminary analysis for the selection of the flywheels' inertia can be performed with the Elroy's Beanie model, depicted in Fig. \ref{fig:elroy-beanie}.
 \begin{figure}
 	\centering
 	\includegraphics[width=.7\linewidth]{figures/elroys-beanie.eps}
-	\caption{Schematic representation of the Elroy's Beanie model used for the preliminary analysis of the pitch motion.}
+	\caption{\small Schematic representation of the Elroy's Beanie model used for the preliminary analysis of the pitch motion.}
 	\label{fig:elroy-beanie}
 \end{figure} 
-This consists of two rigid bodies connected through their \acrshort{com} with a revolute joint. One of the bodies represents the robot in its nominal configuration. The other models the \acrshort{ocs}, here represented by a single wheel for the sake of simplicity. The aim is to examine the rotational dynamics of the system as a whole. To simplify the analysis, in the following we will refer only to the effects on the pitch angle of the robot, keeping in mind that the same arguments apply also for the roll. Let identify the moment of inertia of the robot in the nominal configuration as $I_r$ and the moment of inertia of the two flywheels as $I_f$, both referred to system \acrshort{com}.
+This consists of two rigid bodies connected through their \gls{com} with a revolute joint. One of the bodies represents the robot in its nominal configuration. The other models the \gls{ocs}, here represented by a single wheel for the sake of simplicity. The aim is to examine the rotational dynamics of the system as a whole. To simplify the analysis, in the following we will refer only to the effects on the pitch angle of the robot, keeping in mind that the same arguments apply also for the roll. Let identify the moment of inertia of the robot in the nominal configuration as $I_r$ and the moment of inertia of the two flywheels as $I_f$, both referred to system \gls{com}.
 The angular momentum $L$ of this system can be written as
 \begin{equation}\label{eq:ang_mom_elroy}
 L(t) = \left(I_r + I_{f}\right)\dot{\theta}(t) + I_{f}\dot{\gamma}(t)
@@ -127,7 +139,7 @@ Fig. \ref{fig:inertia_limits} reports the lower bound of $I_{f}$ for different i
 \begin{figure}
 	\centering
 	\includegraphics[width=.7\linewidth]{figures/inertia_limits.eps}
-	\caption{Minimum inertia necessary to obtain the angular velocity $\dot{\theta}_{des}$ starting with different initial $\dot{\theta}_0$ conditions (questo plot va rifatto)}
+	\caption{\small Minimum inertia necessary to obtain the angular velocity $\dot{\theta}_{des}$ starting with different initial $\dot{\theta}_0$ conditions. The area between the two red lines represents what can be achieved with our \gls{ocs}}
 	\label{fig:inertia_limits}
 \end{figure}
 
@@ -135,7 +147,7 @@ Once the desired inertia $I_f$ is chosen with the 2-D Elroy's Beanie model, it m
 \begin{figure}
 	\centering
 	\includegraphics[width=0.7\linewidth]{figures/flywheel.png}
-	\caption{The final design of the reaction wheel, shown together with its inertia principal axes. Here, $h$ is the wheel thickness, $r$ is the inner radius of the wheel and $R$ is the outer one}
+	\caption{\small The final design of the reaction wheel, shown together with its inertia principal axes. Here, $h$ is the wheel thickness, $r$ is the inner radius of the wheel and $R$ is the outer one}
 	\label{fig:flywheel}
 \end{figure}
 We decided to realize the reaction wheels in the shape of hollow cylinders. This shape increases the inertia locating the mass far away from the rotation axis. The inertia tensor expressed in its principal axes, $\bm{I}_f = \mathrm{diag}\left\{ I_{f, xx}, \, I_{f, yy}, \, I_{f, zz}  \right\}$, depends on the cylinders inner and outer radii, $r$ and $R$, its height $h$ and the material density $\rho$:
@@ -145,15 +157,16 @@ We decided to realize the reaction wheels in the shape of hollow cylinders. This
 	I_{f, zz} &= \frac{1}{2}\pi \rho h \left(R^4 - r^4\right)
 	\end{split}
 \end{equation}
-Notice that in the Elroy's Beanie model, there is a single body that models the complete \acrshort{ocs}. To met the specification of controlling both the robot roll and pitch, it is possible to select one of two design options:
+Notice that in the Elroy's Beanie model, there is a single body that models the complete \gls{ocs}. To met the specification of controlling both the robot roll and pitch, it is possible to select one of two design options:
 \begin{enumerate}
 	\item use two couples of flywheels, each couple having the rotation axes aligned and orthogonal to the ones of the other couple;
 	\item use two flywheels, with incident axes of rotation.
 \end{enumerate}
-The first case would lead to a bulky \acrshort{ocs}, requiring brakes to achieve relevant angular momentum. Thus, the second option is considered. The inertia introduced in the Elroy's Beanie model have to be split between the two reaction wheels: $I_f = 2 \, I_{f, zz}$.
-The parameters $R$ and $h$ can be set to have a compact \acrshort{ocs} and $\rho$ depends on the chosen material, that is stainless steel in our case. The inner radius $r$ can be adjusted to obtain the desired inertia. Spokes with negligible mass connect the wheel to the motor shaft. All the parameters, together with the flywheels final inertia and mass are reported in Table \ref{tab:dim_fw}.
+The first case would lead to a bulky \gls{ocs}, requiring brakes to achieve relevant angular momentum. Thus, the second option is considered. The inertia introduced in the Elroy's Beanie model have to be split between the two reaction wheels: $I_f = 2 \, I_{f, zz}$.
+The parameters $R$ and $h$ can be set to have a compact \gls{ocs} and $\rho$ depends on the chosen material, that is stainless steel in our case. The inner radius $r$ can be adjusted to obtain the desired inertia. Spokes with negligible mass connect the wheel to the motor shaft. All the parameters, together with the flywheels final inertia and mass are reported in Table \ref{tab:dim_fw}.
 \begin{table}
 	\centering
+	\caption{\small Size and dynamic parameters of a single reaction wheel}
 	\begin{tabular}{ccc}
 		Parameter & Value & Unit \\
 		\hline
@@ -166,13 +179,12 @@ The parameters $R$ and $h$ can be set to have a compact \acrshort{ocs} and $\rho
 		$I_{xx}, I_{yy}$   & $3.79 \cdot 10^{-5}$ & $\mathrm{kg \cdot m^2}$ \\
 		$I_{zz}$   & $6.92 \cdot 10^{-5}$ & $ \mathrm{kg \cdot m^2}$ \\
 	\end{tabular}
-	\caption{Size and dynamic parameters of a single reaction wheel}
 	\label{tab:dim_fw}
 \end{table}
 
 \subsection{Flywheels Axes of Rotation}
 
-The orientation of the axis of rotation of each flywheel influences their contribution to the total angular momentum. To met the specification of controlling both the robot roll and pitch, the axes of rotation of the left and right wheel, identified in the base reference frame with the unit vectors $\hat{\bm{a}}_l$ and $\hat{\bm{a}}_r$, are set to be incident, laying on a plane parallel to the $xy-$ plane of the base reference frame (see Fig. \ref{fig:angVel}). 
+The orientation of the axis of rotation of each flywheel influences their contribution to the total angular momentum. To met the specification of controlling both the robot roll and pitch, the axes of rotation of the left and right wheel, identified in the base reference frame with the unit vectors $\hat{\bm{a}}_l$ and $\hat{\bm{a}}_r$, are set to be incident, laying on a plane parallel to the $xy-$plane of the base reference frame (see Fig. \ref{fig:angVel}). 
 To remove unnecessary complications, we design two symmetrical modules. We denote with $\alpha \leq \pi/2$ the non-negative incident angle between the wheels'axes of rotation and the robot lateral direction. The matrix 
 \begin{equation}
 \bm{C} = 
@@ -186,11 +198,11 @@ To remove unnecessary complications, we design two symmetrical modules. We denot
 \end{array} \right]
 \end{equation}
 maps the reaction wheel moments into scalar torques $\bm{u} = \left[\begin{array}{cc} \tau_{fl} & \tau_{fr} \end{array} \right]^T$ about the flywheel axes $\hat{\bm{a}}_l$ and $\hat{\bm{a}}_r$ (expressed in the base frame).
-As long as $\bm{C}$ is full column rank, it is possible to control both roll and pitch angles. If $\alpha = 0$, the roll results to be uncontrollable through the \acrshort{ocs}; otherwise, if $\alpha = \pi/2$, the pitch is not uncontrollable. 
+As long as $\bm{C}$ is full column rank, it is possible to control both roll and pitch angles. If $\alpha = 0$, the roll results to be uncontrollable through the \gls{ocs}; otherwise, if $\alpha = \pi/2$, the pitch is not uncontrollable. 
 \begin{figure}
 	\centering
 	\includegraphics[width=0.7\linewidth]{figures/angular_velocities.eps}
-	\caption{Representation of the flywheels rotation axes, seen from the top of the robot}
+	\caption{\small Representation of the flywheels rotation axes, seen from the top of the robot}
 	\label{fig:angVel}
 \end{figure}
 The angle is selected considering the ratio of the eigenvalue along the $x$ and $y$ direction of the ellipsoid of the robot inertia:
@@ -210,9 +222,10 @@ With these considerations, the angular momentum produced by the left and right w
 \end{array}\right]
 \end{split}
 \end{equation}
-in which $\bm{\omega}_{fl}= \omega_{fl} \, \hat{\bm{a}}_{l}$ and $\bm{\omega}_{fr}= \omega_{fr} \, \hat{\bm{a}}_{r}$ are the angular velocity vectors of the two wheels, and $\omega_{fl}$ and $\omega_{fr}$ are the speeds provided to each flywheel by its actuation system. The latter equation shows that the sum of the two angular speed impacts on roll rotations, while their difference can be used to adjust the pitch, see Fig. \ref{fig:sum-dif}. Using the definition of $\bm{C}$, it rewrites as
+in which $\bm{\omega}_{fl}= \omega_{fl} \, \hat{\bm{a}}_{l}$ and $\bm{\omega}_{fr}= \omega_{fr} \, \hat{\bm{a}}_{r}$ are the angular velocity vectors of the two wheels, and $\omega_{fl}$ and $\omega_{fr}$ are the speeds provided to each flywheel by its actuation system. The latter equation shows that the sum of the two angular speed impacts on roll rotations, while their difference can be used to adjust the pitch, see Fig. \ref{fig:sum-diff}. Using the definition of $\bm{C}$, it rewrites as
 \begin{equation}
-\bm{L}_f = I_{f,zz}
+\begin{split}
+\tensor[_b]{\bm{I}}{_f} & = I_{f,zz}
 \left[
 \begin{array}{cc}
 \sin(\alpha) & \sin(\alpha) \\
@@ -225,12 +238,14 @@ in which $\bm{\omega}_{fl}= \omega_{fl} \, \hat{\bm{a}}_{l}$ and $\bm{\omega}_{f
 \omega_{fl} \\
 \omega_{fr}
 \end{array}
-\right] = I_{f,zz} \bm{C} \bm{\omega}_f.
+\right] \\
+&= I_{f,zz} \bm{C} \bm{\omega}_f.
+\end{split}
 \end{equation}
 \begin{figure}
 	\centering
 	\includegraphics[width=.8\linewidth]{figures/sum_diff.eps}
-	\caption{Having incident rotation axes, the \acrshort{ocs} allows to control both the robot roll and pitch. Notice that the roll is influenced by a quantity proportional to the sum of the scalar speed of the flywheels, $\omega_x = \left(\omega_{fl} +  \omega_{fr}\right)\sin(\alpha)$. On the contrary, the pitch depends by a quantity dependent on their difference $\omega_y = \left(\omega_{fl} -  \omega_{fr}\right)\cos(\alpha)$}
+	\caption{\small Having incident rotation axes, the \gls{ocs} allows to control both the robot roll and pitch. Notice that the roll is influenced by a quantity proportional to the sum of the scalar speed of the flywheels, $\omega_x = \left(\omega_{fl} +  \omega_{fr}\right)\sin(\alpha)$. On the contrary, the pitch depends by a quantity dependent on their difference $\omega_y = \left(\omega_{fl} -  \omega_{fr}\right)\cos(\alpha)$}
 	\label{fig:sum-diff}
 \end{figure}
 
@@ -261,14 +276,14 @@ Projecting $\bm{\tau}_{fb}$ onto the flywheel axes with $\bm{C}^T$ we obtain the
 \end{equation}
 
 \section{Simualtions and Experimental Results}
-To validate our \acrshort{ocs}, we present three simulations on different scenarios. We want to test the abilities of: dumping trunk oscillations after the touch down, rejecting disturbance when the robot is in the flight phase of a jump, and working in parallel with the legs joints to achieve an highly dynamic motion. All the simulation are performed in Gazebo. The robot full dynamics is modeled with Pinocchio \cite{carpentier2019pinocchio} the legs joints references are computed off-line using Crocoddyl \cite{mastalli2020crocoddyl} and tracked with a PD joint controller. The \acrshort{ocs} are commanded to track base orientation references using the control law introduced in \ref{subsec:control_law}.
+To validate our \gls{ocs}, we present three simulations on different scenarios. We want to test the abilities of: dumping trunk oscillations after the touch down, rejecting disturbance when the robot is in the flight phase of a jump, and working in parallel with the legs joints to achieve an highly dynamic motion. All the simulation are performed in Gazebo. The robot full dynamics is modeled with Pinocchio \cite{carpentier2019pinocchio} the legs joints references are computed off-line using Crocoddyl \cite{mastalli2020crocoddyl} and tracked with a PD joint controller. The \gls{ocs} are commanded to track base orientation references using the control law introduced in \ref{subsec:control_law}.
 
-In the first test, we use the \acrshort{ocs} to dump the base oscillations generated at the landing, even though we designed it to control the orientation during the flight phase.
+In the first test, we use the \gls{ocs} to dump the base oscillations generated at the landing, even though we designed it to control the orientation during the flight phase.
 To demonstrate this feature, we use the same joint trajectory to perform two simulations: in the first, we control the reaction wheels to track an orientation parallel to the ground, while in the other they are not actuated.
 The joint trajectory realizes a jump with a height of $0.4 \ \mathrm{m}$, a forward distance of $0.8 \ \mathrm{m}$, and a flight phase of $0.5 \ \mathrm{s}$.
 The results point out the possibility of using this device even when the angular momentum is not conserved.
 
-The necessity of having an \acrshort{ocs} is faced up in the case of disturbance that occurs when the robot has no contact with the ground. During the flight phase of a forward jump, a purely angular external momentum on the robot base deflects its orientation trajectory: this disturbance is set to $\dot{\bm{L}}_{b, dist} = \left[\begin{array}{ccc}
+The necessity of having an \gls{ocs} is faced up in the case of disturbance that occurs when the robot has no contact with the ground. During the flight phase of a forward jump, a purely angular external momentum on the robot base deflects its orientation trajectory: this disturbance is set to $\dot{\bm{L}}_{b, dist} = \left[\begin{array}{ccc}
 0.2 & 0.8 & 0.0
 \end{array}
 \right]^T \ \mathrm{N \cdot m}$ and applies for $0.05 \ \mathrm{s}$. If the flywheels are kept stopped, Solo12 inevitably falls after the touch down. Instead, pairing the legs joint PD controller with \ref{eq:ctrl_law}, it is possible to drive the robot to a safe configuration after the landing.
@@ -277,7 +292,7 @@ We carry out a simulation with Moon gravity ($1.62 \ \mathrm{m/s^2}$).
 In this way, it is possible to obtain high jumps with a long flight phase.
 The leg joint trajectory computed offline describes a vertical jump of $1 \ \mathrm{m}$, having a flight phase that lasts $2 \ \mathrm{s}$.
 Right after the lift-off, the reaction wheels start the reorientation task of performing a somersault, i.e., a spin of $360^\circ$ on the pitch.
-For this maneuver, the ideal value of the incident angle $\alpha$ is $0^\circ$ since no roll rotation is required, and it is preferred to use all the contributions of the \acrshort{ocs} on the pitch.
+For this maneuver, the ideal value of the incident angle $\alpha$ is $0^\circ$ since no roll rotation is required, and it is preferred to use all the contributions of the \gls{ocs} on the pitch.
 Our design allows the manual change of this value before the task starts.
 This simulation demonstrates that reaction wheels alleviate the effort to be applied on the legs, which are only used for linear motion.
 
