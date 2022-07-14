@@ -36,7 +36,7 @@
 \pagestyle{empty}
 
 \begin{abstract}%150-250 word abstract
-Aerial motions represent a challenge for quadrupedal robots. They become inevitable to overpass obstacles that cannot be circumvent with standard locomotion gaits. In these cases, the robot must perform a leap to position itself on the obstruction or even flyover it. In this work we propose an \gls{ocs} consisting on a couple of rotating and actuated masses (named flywheels or reaction wheels) for the lightweight open-source robot Solo12. Because of the conservation of angular momentum, their rotation can be adjusted to steer the robot base orientation even when there are no contacts with the ground. The axes of rotation of the flywheels are designed to be incident, allowing us to have a compact orientation control system that is capable of controlling both roll and pitch angles of the platform considering the different moment of inertia in the two directions. We proof the concept with simulation and experiments on the real robot.
+Aerial motions may become the only option to overpass obstacles that cannot be circumvent with standard locomotion gaits.  In these cases, the robot must perform a leap to position itself on the obstruction or even flyover it. However, they represent a challenge for legged robots because of the loss of controllability during the flight phase. In this work we propose an \gls{ocs} consisting on a couple of rotating and actuated masses (named flywheels or reaction wheels) to gain a certain degree of control authority during the flight. Because of the conservation of angular momentum, their rotation can be adjusted to steer the robot base orientation even when there are no contacts with the ground. The axes of rotation of the flywheels are designed to be incident, allowing us to have a compact orientation control system that is capable of controlling both roll and pitch angles of the platform considering the different moment of inertia in the two directions. We proof the concept with simulation and experiments on the real robot Solo12 \cite[solo].
 \end{abstract}
 
 %\begin{IEEEkeywords}
@@ -46,7 +46,7 @@ Aerial motions represent a challenge for quadrupedal robots. They become inevita
 \section{Introduction}\label{sec:introduction}
 Legged locomotion is designed for traversing rough terrain.
 Different types of gait, such as trot or crawl, have been developed to move quadrupedal robots. 
-Thanks to the progress of the last two decades, robots become lighter and able to generate higher torques and forces at the joints, enabling the possibility of doing highly dynamic maneuvers.
+Thanks to the progress of the last two decades, robots become lighter and able to generate higher torques and forces at the joints, enabling the possibility to perform highly dynamic maneuvers.
 Sometimes it is not possible to get around an obstacle with the gaits mentioned above, and jumps may be required. 
 
 When the robot is in air, the \gls{com} moves on the ballistic trajectory, that is completely defined by the lift-off position and velocity. On the other hand, the base orientation can be changed exploiting the conservation of the system angular momentum. This means that it is possible to control the base angular velocity by changing the inertia of the robot, e.g., changing the joints configuration. 
@@ -59,7 +59,7 @@ Nevertheless, the majority of quadrupeds are designed to respect the massless le
 	\caption{\small The \gls{ocs} design, having two flywheels with incident rotation axes (magari sostituire con foto)}
 	\label{fig:solo12flywheels}
 \end{figure} 
-\subsection{Related Work}
+
 Quadrupedal animals, like cats, can rearrange the tail and trunk to correct the orientation during a fall \cite{kane1969dynamical}.
 % Tail
 Many works use an additional link as a tail, like in \cite{chu2019null} and \cite{wenger2016frontal}.
