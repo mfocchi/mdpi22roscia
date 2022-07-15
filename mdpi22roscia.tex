@@ -20,8 +20,7 @@
 \hypersetup{draft}
 \makeglossaries
 
-\title{Reaction Wheels: Enhancing Aerial Maneuvers for
-	Legged Robots (Tentative)}
+\title{Orientation Control System: Enhancing Aerial Maneuvers \\ for Quadruped Robots}
 \author{
 	Francesco Roscia$^{1}$, Andrea Cumerlotti$^{1, \, 2}$, Andrea Del Prete$^{2}$, Claudio Semini$^{1}$, and Michele Focchi$^{1, \, 3}$
 	\thanks{$^1$ Dynamic Legged Systems (DLS) lab, Istituto Italiano di Tecnologia (IIT), Genoa, Italy.
@@ -36,7 +35,7 @@
 \pagestyle{empty}
 
 \begin{abstract}%150-250 word abstract
-For legged robots, aerial motions are the only option to overpass obstacles that cannot be circumvent with standard locomotion gaits. In these cases, the robot must perform a leap to position itself on the obstruction or even flyover it. However, these movements represent a challenge because during the flight phase the center of mass cannot be controlled, and the robot orientation has limited controllability. We focus on the latter issue and propose an \gls{ocs} consisting of two rotating and actuated masses (named flywheels or reaction wheels) to gain control authority on the robot orientation. Because of the conservation of angular momentum, their rotation can be adjusted to steer the robot orientation even when there are no contacts with the ground. The axes of rotation of the flywheels are designed to be incident, leading to a compact orientation control system that is capable of controlling both roll and pitch angles, considering the different moment of inertia in the two directions. We tested the concept with simulations and experiments on the real robot Solo12~\cite[solo].
+For legged robots, aerial motions are the only option to overpass obstacles that cannot be circumvent with standard locomotion gaits. In these cases, the robot must perform a leap to either jump onto the obstacle or even fly over it. However, these movements represent a challenge because during the flight phase the center of mass cannot be controlled, and the robot orientation has limited controllability. This paper focuses on the latter issue and proposes an \gls{ocs} consisting of two rotating and actuated masses (flywheels or reaction wheels) to gain control authority on the robot orientation. Because of the conservation of angular momentum, their rotational velocity can be adjusted to steer the robot orientation even when there are no contacts with the ground. The axes of rotation of the flywheels are designed to be incident, leading to a compact orientation control system that is capable of controlling both roll and pitch angles, considering the different moment of inertia in the two directions. We tested the concept with simulations on the robot Solo12.
 \end{abstract}
 
 %\begin{IEEEkeywords}
@@ -45,9 +44,9 @@ For legged robots, aerial motions are the only option to overpass obstacles that
 
 \section{Introduction}\label{sec:introduction}
 Legged robots are designed for traversing rough terrain.
-Different types of gait, such as trot or crawl, have been developed for quadrupedal robots. 
-Thanks to the progress of the last two decades, robots have become lighter and stronger, which has enabled them to perform highly dynamic maneuvers.
-However, sometimes it is not possible to get around an obstacle with the gaits mentioned above, and jumps are required. 
+Different types of gaits, such as trot or crawl, have been developed for quadrupedal robots. 
+Thanks to the progress of the last two decades, robots have become lighter and stronger, which has enabled them to perform agile locomotion.
+However, sometimes it is not possible to get around or over an obstacle with the gaits mentioned above, and jumps are required. 
 
 When the robot is in the air, the \gls{com} moves on the ballistic trajectory, that is completely defined by the lift-off position and velocity. On the other hand, the base orientation can be changed exploiting the conservation of the system angular momentum. This means that it is possible to control the base angular velocity by changing the inertia of the robot, e.g., changing the joints configuration. 
 
@@ -55,24 +54,24 @@ Nevertheless, the majority of quadrupeds are designed with light legs, resulting
 
 \begin{figure}[t!]
 	\centering
-	\includegraphics[width=.7\linewidth]{figures/solo_flywheels.png}
-	\caption{\small The \gls{ocs} design, having two flywheels with incident rotation axes (magari sostituire con foto)}
+	\includegraphics[width=.7\linewidth]{figures/solo_flywheels_pic.png}
+	\caption{\small The proposed Orientation Control System for Solo12 has two flywheels with incident rotation axes. Each wheel is located in a 3D-printed shell and mounted on the trunk body.}
 	\label{fig:solo12flywheels}
 \end{figure} 
 
 Quadrupedal animals, like cats, can rearrange the tail and trunk to correct the orientation during a fall~\cite{kane1969dynamical}.
 % Tail
-Many works use an additional link as a tail, like in \cite{chu2019null} and \cite{wenger2016frontal}.
+Many works in the field of robotics used an additional link as a tail, like in \cite{chu2019null} and \cite{wenger2016frontal}.
 This link rotates around an axis that does not pass through the robot \gls{com}: the distances between the axis of rotation and the \gls{com} of both trunk and tail result in a large effect on the total angular momentum even with a small tail mass.
 However, the placement of the additional link makes the resulting robot asymmetric. Moreover, due to its limited range of motion, a tail can be used only for a single jump, not for a repeated sequence~\cite{johnson2012tail}.
 % Legs reconfig
-It is possible to obtain a similar result by creating repetitive circular motions with the feet, like in \cite{hoffman2021exploiting} and \cite{kurtz2021mini}. In the latter, the authors proposed special heavy boots for Mini Cheetah and used a neural network to calculate online joint trajectory. However, this solution unnecessarily increases the inertia of the legs, complicating the locomotion problem, which can no longer rely on the massless leg assumption. %\annotation{trova un modo per dire che questa complicazione è data dalla massless assumption che non è più valida} 
+It is possible to obtain a similar result by creating repetitive circular motions with the feet, like in \cite{hoffman2021exploiting} and \cite{kurtz2021mini}. In the latter work, the authors proposed special heavy boots for Mini Cheetah and used a neural network to calculate online joint trajectories. However, this solution unnecessarily increases the inertia of the legs, complicating the locomotion problem, which can no longer rely on the massless leg assumption. %\annotation{trova un modo per dire che questa complicazione è data dalla massless assumption che non è più valida} 
 % Gyros
 Another option is to use a \gls{cmg}.
 It consists of a wheel, spinning at a constant angular velocity inside two or three actuated gimbals.
-Tilting the wheel's axes of rotation generates the gyroscopic torque.
+Tilting the wheel's axis of rotation generates the gyroscopic torque.
 This system is widespread in spacecrafts reorientation \cite{yoon2002spacecraft}, but less frequently exploited in robot locomotion, either wheeled \cite{brown1996single} or legged \cite{mikhalkov2021gyrubot}.
-The \gls{cmg} presents interesting capabilities, but the presence of a pan-tilt unit to drive the gyroscope makes impractical to mount it on a small, lightweight robot.
+The \gls{cmg} presents interesting capabilities, but the presence of a pan-tilt unit to drive the gyroscope makes it impractical to mount it on a small, lightweight robot.
 
 % Reaction wheel
 Reaction wheels represent an additional option for controlling the robot orientation.
@@ -99,10 +98,11 @@ The contributions of the paper are:
 
 
 \subsection{Outline}
-\FR{add outline. \lipsum[1]}
+The reminder of this paper is organized as follow. In Section \ref{sec:background} the of conservation of the total angular momentum is recalled. In Section \ref{sec:ocs}, this principle is used in a simplified model for deriving the lower bound for the inertia of the \gls{ocs} and it is shown how to exploit it for simultaneously controlling the robot roll and pitch orientations. Section \ref{sec:simulations} presents simulation in different scenarios that proof the capability of our \gls{ocs} for rejecting disturbances and tracking angular references when there is no contact with the groung, and dumping base oscillation after the touch down. Conclusions and possible evolution of the work are reported in Section \ref{sec:conclusions}.
 % 
 
 \section{Background}
+\label{sec:background}
 The starting point for any \gls{ocs} is Euler's equation. For any mechanical system, the time derivative of the angular momentum computed with the respect to a reference point $O$, fixed in an inertial frame,  equals the resultant torque with respect to the same reference point:
 \begin{equation}
 \dot{\bm{L}} = \sum_i \bm{M}_i
@@ -114,9 +114,10 @@ When the resultant of the external moments applied to the system is zero, Euler�
 \end{equation}
 which is known as conservation of angular momentum.
 Referring to legged robots, this condition occurs when the system is not in contact with the ground or other objects, e.g., during a fall or the flight phase of a jump.
-In this case, it is possible to change the angular velocity of the base link changing the joint positions and velocities, as a result of the \textit{non-holonomy} of the total angular momentum~\cite{Wieber16}: if the angular momentum of a certain body changes, the one of the others must change to maintain the total sum constant.
+In this case, it is possible to change the angular velocity of the base link changing the joint positions and velocities, as a result of the \textit{non-holonomy} of the total angular momentum \cite{Wieber16}: if the angular momentum of a certain body changes, the one of the others must change to maintain the total sum constant.
 
 \section{Orientation Control System}
+\label{sec:ocs}
 In the following, we present a procedure for selecting the inertia of the flywheels, and we show how to exploit them for simultaneously controlling the robot roll and pitch orientation.
 \subsection{Inertia Selection}
 A preliminary analysis for the selection of the flywheels' inertia can be performed with the Elroy's Beanie model, depicted in Fig. \ref{fig:elroy-beanie}.
@@ -137,14 +138,14 @@ We want to drive the robot to a desired pitch rate $\dot{\theta}_{des}$ acting o
 Without loss of generalities, we can assume the reaction wheel is stationary with the robot at the instant at which the reorientation maneuver starts ($\dot{\gamma}_0 = 0$), having a system angular momentum of $L_0 = \left(I_r + I_{f}\right)\dot{\theta}_0$.
 Under the condition of conservation of the angular momentum, this quantity is constant over time and it is possible to estimate the lower bound for $I_{f}$ given a desired pitch rate and the maximum velocity of the flywheels $\dot{\gamma}_{max}$:
 \begin{equation}
-I_{f} \geq \dfrac{\dot{\theta}_0-\dot{\theta}_{des}}{\dot{\theta}_{des}+\dot{\gamma}_{max}-\dot{\theta}_0}.
+I_{f} \geq I_r \dfrac{ \Delta \dot{\theta} }{\Delta \dot{\theta}+\dot{\gamma}_{max}}.
 \end{equation}
-\ADP{You forgot the dependency on $I_r$}
-Fig. \ref{fig:inertia_limits} reports the lower bound of $I_{f}$ for different initial and desired base angular velocities.
+where $\Delta \dot{\theta} =  \left\lvert \dot{\theta}_0-\dot{\theta}_{des} \right\rvert$ is the base velocity variation.
+Fig. \ref{fig:inertia_limits} reports the lower bound of $I_{f}$ given the desired base velocity variation and the maximum velocity of the actuator.
 \begin{figure}
 	\centering
-	\includegraphics[width=.7\linewidth]{figures/inertia_limits.eps}
-	\caption{\small Minimum inertia necessary to obtain the angular velocity $\dot{\theta}_{des}$ starting with different initial $\dot{\theta}_0$ conditions. The area between the two red lines represents what can be achieved with our \gls{ocs}. \ADP{I would rather see a plot having as axes $\Delta \dot \theta = \dot \theta_{des}- \dot \theta_0$ and $\dot \gamma^{max}$. Moreover the plot should display $I_f / I_r$ because there's an error in the equation below.}}
+	\includegraphics[width=\linewidth]{figures/lowerbound.eps}
+	\caption{\small Minimum inertia of the \gls{ocs} (normalized by the robot inertia) necessary to achieve a base velocity variation $\Delta \dot{\theta}$, given the actuation bound $\dot \gamma^{max}$}
 	\label{fig:inertia_limits}
 \end{figure}
 
@@ -181,8 +182,8 @@ The parameters $R$ and $h$ can be set to have a compact \gls{ocs} and $\rho$ dep
 		$h$   & $1.02\cdot 10^{-2}$ & $\mathrm{m}$ \\
 		$\rho$   & $7.860 \cdot 10^{3}$ & $\mathrm{kg/m^3}$ \\
 		$m$   & $1.02\cdot 10^{-1}$ & $\mathrm{kg}$ \\
-		$I_{xx}, I_{yy}$   & $3.79 \cdot 10^{-5}$ & $\mathrm{kg \cdot m^2}$ \\
-		$I_{zz}$   & $6.92 \cdot 10^{-5}$ & $ \mathrm{kg \cdot m^2}$ \\
+		$I_{xx}, I_{yy}$   & $3.64 \cdot 10^{-5}$ & $\mathrm{kg \cdot m^2}$ \\
+	$I_{zz}$   & $7.11 \cdot 10^{-5}$ & $ \mathrm{kg \cdot m^2}$ \\
 	\end{tabular}
 	\label{tab:dim_fw}
 \end{table}
@@ -282,11 +283,12 @@ Projecting $\bm{\tau}_{fb}$ onto the flywheel axes with $\bm{C}^T$, we obtain th
 \end{equation}
 
 \section{Results of Simulations}
+\label{sec:simulations}
 To validate our \gls{ocs}, we present three simulations on different scenarios. We want to test the capability of the proposed approach to: 
 reject disturbance when the robot is in the flight phase of a jump, damp trunk oscillations after the touch down, 
 and work in parallel with the joints of the legs to achieve a highly dynamic motion. 
 All the simulations are performed in Gazebo. The robot full dynamics is modeled with Pinocchio \cite{carpentier2019pinocchio}. The references for the joints of the legs are computed off-line using Crocoddyl \cite{mastalli2020crocoddyl} and tracked with a PD joint controller. The \gls{ocs} is commanded to 
-track base orientation references using the control law introduced in \ref{subsec:control_law}. The video with all the simulations is available at web link \FR{metti link a dropbox}.
+track base orientation references using the control law introduced in \ref{subsec:control_law}.\footnote{The video with all the simulations is available at web link \url{https://www.dropbox.com/scl/fo/wevvl0zvfp8gofie6x7rw/h?dl=0&rlkey=pap76cr813a0skrvrxl7qgrb9}.}
 
 %this is the main test! 
 The necessity of having an \gls{ocs} is faced up in the case of a disturbance that occurs when the robot has no contact with the ground. 
@@ -306,7 +308,14 @@ it is possible to drive the robot to a safe configuration after the landing (Fig
 
 In the second test, we demonstrate the ability of the \gls{ocs} to reorient the base.
 We let the robot fall from a height of $1 \ \mathrm{m}$ with an initial pitch orientation of $30^\circ$ and zero base angular velocity.
-If we do not actuate the reaction wheels, the robot touches the ground with the same initial orientation and the trunk oscillates. If the \gls{ocs} drives the robot base to be horizontal when it is still in the air, the oscillations after the touch down are drastically reduced, both in the pitch angle and forward direction. \FR{add a plot}
+If we do not actuate the reaction wheels, the robot touches the ground with the same initial orientation and the trunk oscillates. If the \gls{ocs} drives the robot base to be horizontal when it is still in the air, the oscillations after the touch down are drastically reduced, both in the pitch angle and forward direction (Fig. \ref{fig:fall_plot}).
+\begin{figure}
+	\centering
+	\includegraphics[width=1\linewidth]{figures/fall_plot.eps}
+	\caption{\small The \gls{ocs}, driving to zero the robot orientation during a fall, allows for damping the base oscillations after the touch down (vertical dashed line), even without implementing a landing strategy}
+	\label{fig:fall_plot}
+\end{figure}
+
 
 %In a second test, we demonstrate the versatility use the presented \gls{ocs} to dump the base oscillations generated at the landing. 
 %% , even though we designed it to control the orientation during the flight phase.
@@ -329,7 +338,7 @@ This simulation demonstrates that reaction wheels alleviate the effort to be app
 
 
 \section{Conclusions}
-\label{sec:conclusion}
+\label{sec:conclusions}
 
 In this work, we have presented the design of an \gls{ocs}, composed of two flywheels, that enables to control the trunk of a legged robot platform, 
 increasing the accuracy of aerial maneuvers both during the under-actuated phases (i.e., flight phase) as well as 
