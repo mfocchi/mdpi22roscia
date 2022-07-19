@@ -1,0 +1,22 @@
+SLIDE Cover
+In this paper, we present a compact orientation control system based on two flywheels. 
+SLIDE Motivation
+This gives multiple benefits to quadrupedal robots that aim to perform aerial maneuvers.
+Flywheels can correct orientation errors during the flight, due to disturbances or tracking inaccuracies.
+They enable to track angular references for the robot base.
+Even in presence of contacts, they can enhance the landing phase or stabilize dynamic gaits, reducing trunk oscillations.
+Furthermore, they can operate in parallel with the robot limbs to achieve highly dynamic motions, reducing the effort of the legs joints. 
+Our orientation control system is designed for, and tested on, the lightweight, open source quadruped robot Solo12.
+
+SLIDE Design
+Using the Elroy's Beanie model, we select the inertia of the two flywheels. These are mounted on the trunk of the robot, symmetrically with the respect of the sagittal plane. The axes of rotation of the two flywheels are incident, to maximize the trade-off in controlling both the roll and pitch angles of the robot.
+To demonstrate the effectiveness of the approach, we show three simulations.
+
+SLIDE Jump
+During the flight phase of a forward jump, an external moment perturbs the maneuver. [Without implementing a landing strategy,] our system is able to zero the orientation error and let the robot land in a safe configuration.
+
+SLIDE Fall
+Starting with a pitch orientation of 30 degree, [with zero base angular velocity,] it is possible to drastically reduce forward and pitch oscillation if the flywheels are actuated.
+
+SLIDE Back-flip
+Having in mind possible space applications, we show that flywheels can be exploit in lunar gravity to complete a back-flip on the spot, relieving the effort on the legs, that are used only to achieve the vertical motion.
