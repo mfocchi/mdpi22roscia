@@ -104,8 +104,8 @@
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.46974802"
-     inkscape:cx="756.78871"
-     inkscape:cy="575.84064"
+     inkscape:cx="660.99267"
+     inkscape:cy="433.21098"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -184,42 +184,42 @@
          style="stroke-width:0.264583"
          x="26.458332"
          y="80.041664"
-         id="tspan1085">OCS based on flywheels enhances quadrupedal aerial motion</tspan></text>
+         id="tspan1968">A Orientation Control System (OCS) based on flywheels</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
        x="26.578251"
-       y="121.94595"
+       y="137.5038"
        id="text22722-9"><tspan
          sodipodi:role="line"
          style="stroke-width:0.264583"
          x="26.578251"
-         y="121.94595"
+         y="137.5038"
          id="tspan1085-3">2) Track time-varying reference for the robot base </tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
        x="26.304785"
-       y="106.42963"
+       y="120.71712"
        id="text22722-36"><tspan
          sodipodi:role="line"
          style="stroke-width:0.264583"
          x="26.304785"
-         y="106.42963"
+         y="120.71712"
          id="tspan1085-2">1) Correct orientation errors during the flight </tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
        x="26.543919"
-       y="137.45618"
+       y="154.29048"
        id="text22722-6"><tspan
          sodipodi:role="line"
          style="stroke-width:0.264583"
          x="26.543919"
-         y="137.45618"
+         y="154.29048"
          id="tspan1085-8">3) Improve landing phase and stabilize dynamic gaits </tspan></text>
     <g
-       id="g861"
+       id="g863"
        transform="translate(0,-23.212011)">
       <text
          xml:space="preserve"
@@ -253,5 +253,16 @@
        x="359.83334"
        y="119.9112"
        style="stroke-width:6.25" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="26.645908"
+       y="93.402206"
+       id="text3544"><tspan
+         sodipodi:role="line"
+         id="tspan3542"
+         style="stroke-width:0.264583"
+         x="26.645908"
+         y="93.402206">enhances quadrupedal aerial motion</tspan></text>
   </g>
 </svg>
