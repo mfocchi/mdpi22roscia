@@ -1,7 +1,7 @@
 % \usepackage[backend=bibtex,maxnames=2]{biblatex}
 \usepackage[pdftex]{graphicx}
-%\usepackage[numbers]{natbib}
-\bibliographystyle{IEEEtran}
+\usepackage[numbers]{natbib}
+\bibliographystyle{IEEEtran} 
 \usepackage{booktabs}
 \usepackage{moreverb}
 %\usepackage{titlesec}
@@ -18,7 +18,7 @@
 \usepackage{color, colortbl}
 \usepackage[colorlinks,bookmarksopen,bookmarksnumbered,citecolor=red,urlcolor=red]{hyperref}
 
-%\usepackage{enumitem}
+\usepackage{enumitem}
 
 \hypersetup
 {
@@ -37,10 +37,7 @@
 \definecolor{blue_iit}{RGB}{51,51,255}
 \usepackage{algpseudocode}
 \usepackage{algorithm}
-
-
-\usepackage[acronym,hyperfirst=false]{glossaries}
-
+\usepackage{glossaries}
 \usepackage[tight]{units}
 \usepackage[normalem]{ulem} % to strike out text, use: \sout{text}
 \usepackage{cancel}
@@ -55,5 +52,6 @@
 %  \renewcommand{\crefmiddleconjunction}{,}% instead of ", "
 %  \renewcommand{\creflastconjunction}{,}% instead of " and\nobreakspace"
 %}
-\usepackage[sorting=none, style=ieee]{biblatex}
-\addbibresource{references/bibliography.bib} 
+
+%\usepackage[backend=biber, sorting=none, style=ieee]{biblatex}
+%\addbibresource{references/bibliography} 

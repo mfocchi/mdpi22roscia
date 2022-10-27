@@ -1,17 +1,18 @@
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\documentclass[letterpaper, 10 pt, conference]{ieeeconf}  % Comment this line out if you need a4paper
-
-%\documentclass[a4paper, 10pt, conference]{ieeeconf}      % Use this line for a4 paper
+\documentclass[letterpaper, 10 pt, conference]{ieeeconf}      % Use this line for a4 paper
 
 \IEEEoverridecommandlockouts                              % This command is only needed if 
 % you want to use the \thanks command
 
 \overrideIEEEmargins                                      % Needed to meet printer requirements.
 
+% these commands are needed because we use ieeeconf with natbib
+\let\labelindent\relax
 
+\makeatletter
+\let\NAT@parse\undefined
+\makeatother
 
-
-%\documentclass[journal,letterpaper]{IEEEtran}
 % include the list of acronyms, math commands and new commands used in this paper
 \input{includes/used_packages.tex}
 \input{includes/acronyms.tex}
@@ -88,7 +89,7 @@ in a continuous manner. 2) They enable to track a time-varying reference (e.g. t
 In more complex scenarios, like for a somersault, limbs and \gls{ocs} can operate in parallel to achieve a rotation angle larger than the one achievable only with legs (e.g., due to torque limitation). 
 
 \subsection{Proposed Approach and Contribution}
-In this work, we present a compact \gls{ocs} based on two flywheels, mounted on the trunk of the lightweight quadruped Solo12 \cite{grimminger2020open}, see Fig. \ref{fig:solo12flywheels}. 
+In this work, we present a compact \gls{ocs} based on two flywheels, mounted on the trunk of the lightweight quadruped Solo12 \cite{grimminger2020open}, see Fig. \ref{fig:solo12flywheels}.
 The contributions of the paper are:
 \begin{itemize}
 	\item the design of a novel \gls{ocs} that enables to control the orientation of a legged robot during a jump in an effective way, while keeping the design simple. 
@@ -99,7 +100,7 @@ The contributions of the paper are:
 
 
 \subsection{Outline}
-The reminder of this paper is organized as follow. In Section \ref{sec:background}, the law of conservation of the total angular momentum is recalled. In Section \ref{sec:ocs}, the design principles are presented together with the strategy for simultaneously control the robot roll and pitch orientations. Section \ref{sec:simulations} presents simulation in different scenarios that demonstrate the the capability of our \gls{ocs} to reject disturbances and to track angular references when there is no contact with the ground, and damping of base oscillation after the touch-down. Conclusions and a possible evolution of the work ar reported in Section \ref{sec:conclusions}.
+The remainder of this paper is organized as follow. In Section \ref{sec:background}, the law of conservation of the total angular momentum is recalled. In Section \ref{sec:ocs}, the design principles are presented together with the strategy for simultaneously control the robot roll and pitch orientations. Section \ref{sec:simulations} presents simulation in different scenarios that demonstrate the the capability of our \gls{ocs} to reject disturbances and to track angular references when there is no contact with the ground, and damping of base oscillation after the touch-down. Conclusions and a possible evolution of the work ar reported in Section \ref{sec:conclusions}.
 % 
 
 \section{Background}
@@ -117,10 +118,12 @@ which is known as conservation of angular momentum.
 Referring to legged robots, this condition occurs when the system is not in contact with the ground or other objects, e.g., during a fall or the flight phase of a jump.
 In this case, it is possible to change the angular velocity of the base link changing the joint positions and velocities, as a result of the \textit{non-holonomy} of the total angular momentum \cite{Wieber16}: if the angular momentum of a certain body changes, the one of the others must change to maintain the total sum constant.
 
+\FR{In Solo12, even if the each limb accounts for about $13.4\%$ of the total mass, changes of the total robot inertia come with the motion of only the upperleg (thigh) and the lowerleg (calf), since the displacement of distribution of the hip mass with the system \acrshort{com} is approximately constant. In view of this, each limb accounts for only $7.5\%$ of the total mass in varying the the total robot inertia.}
+
 \section{Orientation Control System}
 \label{sec:ocs}
 In this section, we present a procedure to select the inertia of the flywheels, and we show how to exploit them for simultaneously controlling the robot roll and pitch orientation.
-\subsection{Inertia Selection}
+\subsection{Bounds on the Inertia}
 A preliminary analysis for the selection of the flywheels' inertia can be performed with the Elroy's Beanie model, depicted in Fig. \ref{fig:elroy-beanie}.
 \begin{figure}
 	\centering
@@ -311,7 +314,7 @@ it is possible to drive the robot to a safe configuration after the landing (Fig
 
 In the second test, we demonstrate the ability of the \gls{ocs} to reorient the base.
 We let the robot fall from a height of $1 \ \mathrm{m}$ with an initial pitch orientation of $30^\circ$ and zero base angular velocity.
-If we do not actuate the flywheels, the robot touches the ground with the same initial orientation and the trunk oscillates. If the \gls{ocs}is enabled, it drives the robot base to be horizontal when it is still in the air and the oscillations after the touch-down are drastically reduced, both in the pitch angle and forward direction (Fig. \ref{fig:fall_plot}).
+If we do not actuate the flywheels, the robot touches the ground with the same initial orientation and the trunk oscillates. If the \gls{ocs} is enabled, it drives the robot base to be horizontal when it is still in the air and the oscillations after the touch-down are drastically reduced, both in the pitch angle and forward direction (Fig. \ref{fig:fall_plot}).
 \begin{figure}
 	\centering
 	\includegraphics[width=1\linewidth]{figures/fall_plot.eps}
@@ -364,9 +367,6 @@ All the authors want to thank Dr. Roy Featherstone for interesting tips that sta
 \newline
 The publication was created with the co-financing of the European Union FSE-REACT-EU, PON Research and Innovation 2014-2020 DM1062 / 2021.
 
-
-
-
-
-\printbibliography
+\bibliography{references/bibliography}
+%\printbibliography
 \end{document}
