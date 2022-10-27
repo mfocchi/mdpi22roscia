@@ -195,7 +195,7 @@
          style="stroke-width:0.264583"
          x="26.578251"
          y="137.5038"
-         id="tspan1085-3">2) Track time-varying reference for the robot base </tspan></text>
+         id="tspan1085-3">2) Track time-varying reference for the robot base.</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
@@ -206,7 +206,7 @@
          style="stroke-width:0.264583"
          x="26.304785"
          y="120.71712"
-         id="tspan1085-2">1) Correct orientation errors during the flight </tspan></text>
+         id="tspan1085-2">1) Correct orientation errors during the flight.</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
@@ -217,7 +217,7 @@
          style="stroke-width:0.264583"
          x="26.543919"
          y="154.29048"
-         id="tspan1085-8">3) Improve landing phase and stabilize dynamic gaits </tspan></text>
+         id="tspan1085-8">3) Improve landing phase and stabilize dynamic gaits.</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
@@ -228,7 +228,7 @@
          style="stroke-width:0.264583"
          x="26.408895"
          y="171.07716"
-         id="tspan1085-7">4) Relieve the effort of the legs</tspan></text>
+         id="tspan1085-7">4) Relieve the effort of the legs.</tspan></text>
     <g
        id="g863"
        transform="translate(0,-23.212011)">
@@ -274,6 +274,6 @@
          id="tspan3542"
          style="stroke-width:0.264583"
          x="26.645908"
-         y="93.402206">enhances quadrupedal aerial motion</tspan></text>
+         y="93.402206">enhances quadrupedal aerial motion.</tspan></text>
   </g>
 </svg>

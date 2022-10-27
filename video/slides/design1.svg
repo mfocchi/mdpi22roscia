@@ -782,10 +782,10 @@
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.46974801"
-     inkscape:cx="999.47203"
-     inkscape:cy="614.15906"
+     inkscape:cx="856.84237"
+     inkscape:cy="414.05178"
      inkscape:document-units="mm"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="g30616"
      showgrid="true"
      units="px"
      inkscape:window-width="1848"
@@ -863,7 +863,7 @@
        style="stroke-width:1.38911" />
     <g
        id="g30616"
-       transform="translate(-16.068527,1.1608476)">
+       transform="translate(-16.068527,15.977518)">
       <text
          xml:space="preserve"
          style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
@@ -874,7 +874,7 @@
            style="stroke-width:0.264583"
            x="42.333332"
            y="69.458336"
-           id="tspan4273">The inertia of the flywheels is selectet using the </tspan></text>
+           id="tspan4273">The inertia of the flywheels is selected using the </tspan></text>
       <text
          xml:space="preserve"
          style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
@@ -885,7 +885,7 @@
            id="tspan8685"
            style="stroke-width:0.264583"
            x="42.236195"
-           y="82.481316">Elroy's Beanie Model</tspan></text>
+           y="82.481316">Elroy's Beanie Model.</tspan></text>
     </g>
   </g>
 </svg>
