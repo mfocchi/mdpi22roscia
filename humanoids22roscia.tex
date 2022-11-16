@@ -61,10 +61,10 @@ Nevertheless, the majority of quadrupeds are designed with light legs, resulting
 	\label{fig:solo12flywheels}
 \end{figure} 
 
-Quadrupedal animals, like cats, can rearrange the tail and trunk to correct the orientation during a fall \cite{kane1969dynamical}.
+Quadrupedal animals, like cats, can rearrange tail and trunk to correct the orientation during a fall \cite{kane1969dynamical}.
 % Tail
 Many works in the field of robotics used an additional link as a tail, like in \cite{chu2019null} and \cite{wenger2016frontal}.
-This link rotates around an axis that does not pass through the robot \gls{com}: the distances between the axis of rotation and the \gls{com} of both trunk and tail result in a large effect on the total angular momentum even with a small tail mass.
+This link rotates around an axis that does not pass through the robot \gls{com}: the distances between the axis of rotation and the \gls{com} of both trunk and tail result in a large effect on the total inertia even with a small tail mass.
 However, the placement of the additional link makes the resulting robot asymmetric. Moreover, due to its limited range of motion, a tail can be used only for a single jump, not for a repeated sequence~\cite{johnson2012tail}.
 % Legs reconfig
 It is possible to obtain a similar result by creating repetitive circular motions with the feet, like in \cite{hoffman2021exploiting} and \cite{kurtz2021mini}. In the latter work, the authors proposed special heavy boots for Mini Cheetah and used a neural network to calculate online joint trajectories. However, this solution unnecessarily increases the inertia of the legs, complicating the locomotion problem, which can no longer rely on the massless leg assumption. %\annotation{trova un modo per dire che questa complicazione è data dalla massless assumption che non è più valida} 
@@ -229,7 +229,7 @@ in which $\bm{\omega}_{fl}= \omega_{fl} \, \hat{\bm{a}}_{l}$ and $\bm{\omega}_{f
 \end{figure}
 
 \subsection{Inertia Selection}
-Once the desired inertia $I_f$ is chosen, according to the 2-D Elroy's Beanie model, it is used to realize the 3-D \gls{ocs} (Fig. \ref{fig:flywheel}). 
+Once the desired inertia $I_f$ is chosen, according to the 2D Elroy's Beanie model, it is used to realize the 3D \gls{ocs} (Fig. \ref{fig:flywheel}). 
 \begin{figure}
 	\centering
 	\includegraphics[width=0.7\linewidth]{figures/flywheel_opaque.png}
