@@ -1,48 +1,180 @@
-% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\documentclass[letterpaper, 10 pt, conference]{ieeeconf}      % Use this line for a4 paper
+%  LaTeX support: latex@mdpi.com 
+%  For support, please attach all files needed for compiling as well as the log file, and specify your operating system, LaTeX version, and LaTeX editor.
 
-\IEEEoverridecommandlockouts                              % This command is only needed if 
-% you want to use the \thanks command
+%=================================================================
+\documentclass[sensors,article,submit,pdftex,moreauthors]{Definitions/mdpi} 
+% For posting an early version of this manuscript as a preprint, you may use "preprints" as the journal and change "submit" to "accept". The document class line would be, e.g., \documentclass[preprints,article,accept,moreauthors,pdftex]{mdpi}. This is especially recommended for submission to arXiv, where line numbers should be removed before posting. For preprints.org, the editorial staff will make this change immediately prior to posting.
 
-\overrideIEEEmargins                                      % Needed to meet printer requirements.
+%--------------------
+% Class Options:
+%--------------------
+%----------
+% journal
+%----------
+% Choose between the following MDPI journals:
+% acoustics, actuators, addictions, admsci, adolescents, aerospace, agriculture, agriengineering, agronomy, ai, algorithms, allergies, alloys, analytica, animals, antibiotics, antibodies, antioxidants, applbiosci, appliedchem, appliedmath, applmech, applmicrobiol, applnano, applsci, aquacj, architecture, arts, asc, asi, astronomy, atmosphere, atoms, audiolres, automation, axioms, bacteria, batteries, bdcc, behavsci, beverages, biochem, bioengineering, biologics, biology, biomass, biomechanics, biomed, biomedicines, biomedinformatics, biomimetics, biomolecules, biophysica, biosensors, biotech, birds, bloods, blsf, brainsci, breath, buildings, businesses, cancers, carbon, cardiogenetics, catalysts, cells, ceramics, challenges, chemengineering, chemistry, chemosensors, chemproc, children, chips, cimb, civileng, cleantechnol, climate, clinpract, clockssleep, cmd, coasts, coatings, colloids, colorants, commodities, compounds, computation, computers, condensedmatter, conservation, constrmater, cosmetics, covid, crops, cryptography, crystals, csmf, ctn, curroncol, currophthalmol, cyber, dairy, data, dentistry, dermato, dermatopathology, designs, diabetology, diagnostics, dietetics, digital, disabilities, diseases, diversity, dna, drones, dynamics, earth, ebj, ecologies, econometrics, economies, education, ejihpe, electricity, electrochem, electronicmat, electronics, encyclopedia, endocrines, energies, eng, engproc, ent, entomology, entropy, environments, environsciproc, epidemiologia, epigenomes, est, fermentation, fibers, fintech, fire, fishes, fluids, foods, forecasting, forensicsci, forests, foundations, fractalfract, fuels, futureinternet, futureparasites, futurepharmacol, futurephys, futuretransp, galaxies, games, gases, gastroent, gastrointestdisord, gels, genealogy, genes, geographies, geohazards, geomatics, geosciences, geotechnics, geriatrics, hazardousmatters, healthcare, hearts, hemato, heritage, highthroughput, histories, horticulturae, humanities, humans, hydrobiology, hydrogen, hydrology, hygiene, idr, ijerph, ijfs, ijgi, ijms, ijns, ijtm, ijtpp, immuno, informatics, information, infrastructures, inorganics, insects, instruments, inventions, iot, j, jal, jcdd, jcm, jcp, jcs, jdb, jeta, jfb, jfmk, jimaging, jintelligence, jlpea, jmmp, jmp, jmse, jne, jnt, jof, joitmc, jor, journalmedia, jox, jpm, jrfm, jsan, jtaer, jzbg, kidney, kidneydial, knowledge, land, languages, laws, life, liquids, literature, livers, logics, logistics, lubricants, lymphatics, machines, macromol, magnetism, magnetochemistry, make, marinedrugs, materials, materproc, mathematics, mca, measurements, medicina, medicines, medsci, membranes, merits, metabolites, metals, meteorology, methane, metrology, micro, microarrays, microbiolres, micromachines, microorganisms, microplastics, minerals, mining, modelling, molbank, molecules, mps, msf, mti, muscles, nanoenergyadv, nanomanufacturing, nanomaterials, ncrna, network, neuroglia, neurolint, neurosci, nitrogen, notspecified, nri, nursrep, nutraceuticals, nutrients, obesities, oceans, ohbm, onco, oncopathology, optics, oral, organics, organoids, osteology, oxygen, parasites, parasitologia, particles, pathogens, pathophysiology, pediatrrep, pharmaceuticals, pharmaceutics, pharmacoepidemiology, pharmacy, philosophies, photochem, photonics, phycology, physchem, physics, physiologia, plants, plasma, pollutants, polymers, polysaccharides, poultry, powders, preprints, proceedings, processes, prosthesis, proteomes, psf, psych, psychiatryint, psychoactives, publications, quantumrep, quaternary, qubs, radiation, reactions, recycling, regeneration, religions, remotesensing, reports, reprodmed, resources, rheumato, risks, robotics, ruminants, safety, sci, scipharm, seeds, sensors, separations, sexes, signals, sinusitis, skins, smartcities, sna, societies, socsci, software, soilsystems, solar, solids, sports, standards, stats, stresses, surfaces, surgeries, suschem, sustainability, symmetry, synbio, systems, taxonomy, technologies, telecom, test, textiles, thalassrep, thermo, tomography, tourismhosp, toxics, toxins, transplantology, transportation, traumacare, traumas, tropicalmed, universe, urbansci, uro, vaccines, vehicles, venereology, vetsci, vibration, viruses, vision, waste, water, wem, wevj, wind, women, world, youth, zoonoticdis 
 
-% these commands are needed because we use ieeeconf with natbib
-\let\labelindent\relax
+%---------
+% article
+%---------
+% The default type of manuscript is "article", but can be replaced by: 
+% abstract, addendum, article, book, bookreview, briefreport, casereport, comment, commentary, communication, conferenceproceedings, correction, conferencereport, entry, expressionofconcern, extendedabstract, datadescriptor, editorial, essay, erratum, hypothesis, interestingimage, obituary, opinion, projectreport, reply, retraction, review, perspective, protocol, shortnote, studyprotocol, systematicreview, supfile, technicalnote, viewpoint, guidelines, registeredreport, tutorial
+% supfile = supplementary materials
 
-\makeatletter
-\let\NAT@parse\undefined
+%----------
+% submit
+%----------
+% The class option "submit" will be changed to "accept" by the Editorial Office when the paper is accepted. This will only make changes to the frontpage (e.g., the logo of the journal will get visible), the headings, and the copyright information. Also, line numbering will be removed. Journal info and pagination for accepted papers will also be assigned by the Editorial Office.
+
+%------------------
+% moreauthors
+%------------------
+% If there is only one author the class option oneauthor should be used. Otherwise use the class option moreauthors.
+
+%---------
+% pdftex
+%---------
+% The option pdftex is for use with pdfLaTeX. If eps figures are used, remove the option pdftex and use LaTeX and dvi2pdf.
+
+%=================================================================
+% MDPI internal commands
+\firstpage{1} 
+\makeatletter 
+\setcounter{page}{\@firstpage} 
 \makeatother
+\pubvolume{1}
+\issuenum{1}
+\articlenumber{0}
+\pubyear{2022}
+\copyrightyear{2022}
+%\externaleditor{Academic Editor: Firstname Lastname}
+\datereceived{} 
+%\daterevised{} % Only for the journal Acoustics
+\dateaccepted{} 
+\datepublished{} 
+%\datecorrected{} % Corrected papers include a "Corrected: XXX" date in the original paper.
+%\dateretracted{} % Corrected papers include a "Retracted: XXX" date in the original paper.
+\hreflink{https://doi.org/} % If needed use \linebreak
+%\doinum{}
+%------------------------------------------------------------------
+% The following line should be uncommented if the LaTeX file is uploaded to arXiv.org
+%\pdfoutput=1
 
-% include the list of acronyms, math commands and new commands used in this paper
-\input{includes/used_packages.tex}
+%=================================================================
+% Add packages and commands here. The following packages are loaded in our class file: fontenc, inputenc, calc, indentfirst, fancyhdr, graphicx, epstopdf, lastpage, ifthen, lineno, float, amsmath, setspace, enumitem, mathpazo, booktabs, titlesec, etoolbox, tabto, xcolor, soul, multirow, microtype, tikz, totcount, changepage, attrib, upgreek, cleveref, amsthm, hyphenat, natbib, hyperref, footmisc, url, geometry, newfloat, caption
+\usepackage{glossaries}
+\usepackage{bm}
+\usepackage{tensor}
+%\input{includes/used_packages.tex}
 \input{includes/acronyms.tex}
-\input{includes/math_commands.tex}
-\input{includes/newcommands.tex}
-\hypersetup{draft}
+%\input{includes/math_commands.tex}
+%\input{includes/newcommands.tex}
+
+\newcommand{\MF}[1]{\textcolor{red}{\textbf{mfocchi}: #1}}
+\newcommand{\CS}[1]{\textcolor{violet}{\textbf{csemini}: #1}}
+\newcommand{\FR}[1]{\textcolor{teal}{\textbf{froscia}: #1}}
+\newcommand{\ADP}[1]{\textcolor{blue}{\textbf{adelprete}: #1}}
+%=================================================================
+%% Please use the following mathematics environments: Theorem, Lemma, Corollary, Proposition, Characterization, Property, Problem, Example, ExamplesandDefinitions, Hypothesis, Remark, Definition, Notation, Assumption
+%% For proofs, please use the proof environment (the amsthm package is loaded by the MDPI class).
+
+%=================================================================
+% Full title of the paper (Capitalized)
+\Title{Orientation Control System: Enhancing Aerial Maneuvers for Quadruped Robots}
+
+% MDPI internal command: Title for citation in the left column
+\TitleCitation{Orientation Control System: Enhancing Aerial Maneuvers for Quadruped Robots}
+
+% Author Orchid ID: enter ID or remove command
+%\newcommand{\orcidauthorA}{0000-0000-0000-000X} % Add \orcidA{} behind the author's name
+%\newcommand{\orcidauthorB}{0000-0000-0000-000X} % Add \orcidB{} behind the author's name
+
+% Authors, for the paper (add full first names)
+\Author{Francesco Roscia $^{1, ^*}$, Andrea Cumerlotti $^{?}$, Andrea Del Prete $^{2}$, Claudio Semini $^{1}$ and Michele Focchi$^{1, \, 3}$}
+
+%\longauthorlist{yes}
+
+% MDPI internal command: Authors, for metadata in PDF
+\AuthorNames{Francesco Roscia, Andrea Cumerlotti, Andrea Del Prete, Claudio Semini and Michele Focchi}
+
+% MDPI internal command: Authors, for citation in the left column
+\AuthorCitation{Roscia, F.; Cumerlotti, A.; Del Prete, A., Semini, C.; Focchi, M.}
+% If this is a Chicago style journal: Lastname, Firstname, Firstname Lastname, and Firstname Lastname.
+
+% Affiliations / Addresses (Add [1] after \address if there is only one affiliation.)
+\address{%
+$^{1}$ \quad Dynamic Legged Systems (DLS) lab, Istituto Italiano di Tecnologia (IIT), Genoa, Italy\\
+$^{2}$ \quad Industrial Engineering Department (DII), University of Trento, Trento, Italy\\
+$^{3}$ \quad Department of Information Engineering and Computer Science (DISI), University of Trento, Trento, Italy}
+
+% Contact information of the corresponding author
+\corres{Correspondence: francesco.roscia@iit.it}
+
+% Current address and/or shared authorship
+%\firstnote{Current address: Affiliation 3.} 
+%\secondnote{These authors contributed equally to this work.}
+% The commands \thirdnote{} till \eighthnote{} are available for further notes
+
+%\simplesumm{} % Simple summary
+
+%\conference{} % An extended version of a conference paper
+
+% Abstract (Do not insert blank lines, i.e. \\) 
+\abstract{For legged robots, aerial motions are the only option to overpass obstacles that cannot be circumvent with standard locomotion gaits. In these cases, the robot must perform a leap to either jump onto the obstacle or fly over it. However, these movements represent a challenge because during the flight phase the \gls{com} cannot be controlled, and the robot orientation has limited controllability. This paper focuses on the latter issue and proposes an \gls{ocs} consisting of two rotating and actuated masses (flywheels or reaction wheels) to gain control authority on the robot orientation. Because of the conservation of angular momentum, their rotational velocity can be adjusted to steer the robot orientation even when there are no contacts with the ground. The axes of rotation of the flywheels are designed to be incident, leading to a compact orientation control system that is capable of controlling both roll and pitch angles, considering the different moment of inertia in the two directions. We tested the concept with simulations on the robot Solo12.}
+
 \makeglossaries
+% Keywords
+\keyword{keyword 1; keyword 2; keyword 3 (List three to ten pertinent keywords specific to the article; yet reasonably common within the subject discipline.)} 
 
-\title{Orientation Control System: Enhancing Aerial Maneuvers \\ for Quadruped Robots}
-\author{
-	Francesco Roscia$^{1}$, Andrea Cumerlotti$^{1, \, 2}$, Andrea Del Prete$^{2}$, Claudio Semini$^{1}$, and Michele Focchi$^{1, \, 3}$
-	\thanks{$^1$ Dynamic Legged Systems (DLS) lab, Istituto Italiano di Tecnologia (IIT), Genoa, Italy.
-		$^2$ Industrial Engineering Department (DII), University of Trento, Trento, Italy.
-		$^3$ Department of Information Engineering and Computer Science (DISI), University of Trento, Trento, Italy.
-}}
+% The fields PACS, MSC, and JEL may be left empty or commented out if not applicable
+%\PACS{J0101}
+%\MSC{}
+%\JEL{}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Only for the journal Diversity
+%\LSID{\url{http://}}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Only for the journal Applied Sciences
+%\featuredapplication{Authors are encouraged to provide a concise description of the specific application or a potential application of the work. This section is not mandatory.}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Only for the journal Data
+%\dataset{DOI number or link to the deposited data set if the data set is published separately. If the data set shall be published as a supplement to this paper, this field will be filled by the journal editors. In this case, please submit the data set as a supplement.}
+%\datasetlicense{License under which the data set is made available (CC0, CC-BY, CC-BY-SA, CC-BY-NC, etc.)}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Only for the journal Toxins
+%\keycontribution{The breakthroughs or highlights of the manuscript. Authors can write one or two sentences to describe the most important part of the paper.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Only for the journal Encyclopedia
+%\encyclopediadef{For entry manuscripts only: please provide a brief overview of the entry title instead of an abstract.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Only for the journal Advances in Respiratory Medicine
+%\addhighlights{yes}
+%\renewcommand{\addhighlights}{%
+
+%\noindent This is an obligatory section in “Advances in Respiratory Medicine”, whose goal is to increase the discoverability and readability of the article via search engines and other scholars. Highlights should not be a copy of the abstract, but a simple text allowing the reader to quickly and simplified find out what the article is about and what can be cited from it. Each of these parts should be devoted up to 2~bullet points.\vspace{3pt}\\
+%\textbf{What are the main findings?}
+% \begin{itemize}[labelsep=2.5mm,topsep=-3pt]
+% \item First bullet.
+% \item Second bullet.
+% \end{itemize}\vspace{3pt}
+%\textbf{What is the implication of the main finding?}
+% \begin{itemize}[labelsep=2.5mm,topsep=-3pt]
+% \item First bullet.
+% \item Second bullet.
+% \end{itemize}
+%}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
-\maketitle
-\thispagestyle{empty}
-\pagestyle{empty}
 
-\begin{abstract}%150-250 word abstract
-For legged robots, aerial motions are the only option to overpass obstacles that cannot be circumvent with standard locomotion gaits. In these cases, the robot must perform a leap to either jump onto the obstacle or fly over it. However, these movements represent a challenge because during the flight phase the \gls{com} cannot be controlled, and the robot orientation has limited controllability. This paper focuses on the latter issue and proposes an \gls{ocs} consisting of two rotating and actuated masses (flywheels or reaction wheels) to gain control authority on the robot orientation. Because of the conservation of angular momentum, their rotational velocity can be adjusted to steer the robot orientation even when there are no contacts with the ground. The axes of rotation of the flywheels are designed to be incident, leading to a compact orientation control system that is capable of controlling both roll and pitch angles, considering the different moment of inertia in the two directions. We tested the concept with simulations on the robot Solo12.
-\end{abstract}
-
-%\begin{IEEEkeywords}
-	 
-%\end{IEEEkeywords}
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction}\label{sec:introduction}
 Legged robots are designed for traversing rough terrain.
 Different types of gaits, such as trot or crawl, have been developed for quadrupedal robots. 
@@ -55,16 +187,16 @@ Nevertheless, the majority of quadrupeds are designed with light legs, resulting
 
 \begin{figure}[t!]
 	\centering
-	\includegraphics[width=.7\linewidth]{figures/solo_fw_pic_compressed.png}
+	\includegraphics[width=.5\linewidth]{figures/solo_fw_pic_compressed.png}
 	\caption{\small The proposed Orientation Control System for 
 		for the $2.5 \ \mathrm{kg}$ quadruped robot Solo12 consists of two $0.1 \ \mathrm{kg}$ flywheels with incident rotation axes. Each wheel is located in a 3D-printed shell and mounted on the trunk body.}
 	\label{fig:solo12flywheels}
 \end{figure} 
 
-Quadrupedal animals, like cats, can rearrange the tail and trunk to correct the orientation during a fall \cite{kane1969dynamical}.
+Quadrupedal animals, like cats, can rearrange tail and trunk to correct the orientation during a fall \cite{kane1969dynamical}.
 % Tail
 Many works in the field of robotics used an additional link as a tail, like in \cite{chu2019null} and \cite{wenger2016frontal}.
-This link rotates around an axis that does not pass through the robot \gls{com}: the distances between the axis of rotation and the \gls{com} of both trunk and tail result in a large effect on the total angular momentum even with a small tail mass.
+This link rotates around an axis that does not pass through the robot \gls{com}: the distances between the axis of rotation and the \gls{com} of both trunk and tail result in a large effect on the total inertia even with a small tail mass.
 However, the placement of the additional link makes the resulting robot asymmetric. Moreover, due to its limited range of motion, a tail can be used only for a single jump, not for a repeated sequence~\cite{johnson2012tail}.
 % Legs reconfig
 It is possible to obtain a similar result by creating repetitive circular motions with the feet, like in \cite{hoffman2021exploiting} and \cite{kurtz2021mini}. In the latter work, the authors proposed special heavy boots for Mini Cheetah and used a neural network to calculate online joint trajectories. However, this solution unnecessarily increases the inertia of the legs, complicating the locomotion problem, which can no longer rely on the massless leg assumption. %\annotation{trova un modo per dire che questa complicazione è data dalla massless assumption che non è più valida} 
@@ -101,7 +233,7 @@ The contributions of the paper are:
 
 \subsection{Outline}
 The remainder of this paper is organized as follow. In Section \ref{sec:background}, the law of conservation of the total angular momentum is recalled. In Section \ref{sec:ocs}, the design principles are presented together with the strategy for simultaneously control the robot roll and pitch orientations. Section \ref{sec:simulations} presents simulation in different scenarios that demonstrate the the capability of our \gls{ocs} to reject disturbances and to track angular references when there is no contact with the ground, and damping of base oscillation after the touch-down. Conclusions and a possible evolution of the work ar reported in Section \ref{sec:conclusions}.
-% 
+
 
 \section{Background}
 \label{sec:background}
@@ -229,7 +361,7 @@ in which $\bm{\omega}_{fl}= \omega_{fl} \, \hat{\bm{a}}_{l}$ and $\bm{\omega}_{f
 \end{figure}
 
 \subsection{Inertia Selection}
-Once the desired inertia $I_f$ is chosen, according to the 2-D Elroy's Beanie model, it is used to realize the 3-D \gls{ocs} (Fig. \ref{fig:flywheel}). 
+Once the desired inertia $I_f$ is chosen, according to the 2D Elroy's Beanie model, it is used to realize the 3D \gls{ocs} (Fig. \ref{fig:flywheel}). 
 \begin{figure}
 	\centering
 	\includegraphics[width=0.7\linewidth]{figures/flywheel_opaque.png}
@@ -245,24 +377,25 @@ I_{f, zz} &= \frac{1}{2}\pi \rho h \left(R^4 - r^4\right)
 \end{equation}
 Notice that in the Elroy's Beanie model, there is a single body that models the complete \gls{ocs}. The inertia introduced in the Elroy's Beanie model has to be split between the two flywheels: $I_{f, zz} = I_f/\left(2\cos(\alpha)\right)$. 
 The parameters $R$ and $h$ can be set to have a compact \gls{ocs} and $\rho$ depends on the chosen material, that is stainless steel in our case. The inner radius $r$ can be adjusted to obtain the desired inertia. Spokes with negligible mass connect the wheel to the motor shaft. All the parameters are reported in Table \ref{tab:dim_fw}, together with the selected inertia and mass of a single flywheel.
-\begin{table}
-	\centering
-	\caption{\small Size and dynamic parameters of a single flywheel}
-	\begin{tabular}{ccc}
-		Parameter & Value & Unit \\
-		\hline
-		\hline
+\begin{table}[H] 
+	\caption{Size and dynamic parameters of a single flywheel}
+	\label{tab:dim_fw}
+	\newcolumntype{C}{>{\centering\arraybackslash}X}
+	\begin{tabularx}{\textwidth}{CCC}
+		\toprule
+		\textbf{Parameter} & \textbf{Value} & \textbf{Unit}\\
+		\midrule
 		$r$ & $2.20\cdot 10^{-2}$ & $\mathrm{m}$ \\
 		$R$ & $3.00\cdot 10^{-2}$ & $\mathrm{m}$ \\
 		$h$   & $1.02\cdot 10^{-2}$ & $\mathrm{m}$ \\
 		$\rho$   & $7.860 \cdot 10^{3}$ & $\mathrm{kg/m^3}$ \\
 		$m$   & $1.02\cdot 10^{-1}$ & $\mathrm{kg}$ \\
 		$I_{xx}, I_{yy}$   & $3.64 \cdot 10^{-5}$ & $\mathrm{kg \cdot m^2}$ \\
-		$I_{zz}$   & $7.11 \cdot 10^{-5}$ & $ \mathrm{kg \cdot m^2}$ \\
-	\end{tabular}
-	\label{tab:dim_fw}
+		$I_{zz}$   & $7.11 \cdot 10^{-5}$ & $ \mathrm{kg \cdot m^2}$\\
+		\bottomrule
+	\end{tabularx}
 \end{table}
-
+\unskip
 \subsection{Flywheels Control Law}
 \label{subsec:control_law}
 To derive a control law based on the robot base orientation, we make use of \eqref{eq:cons_ang_mom}, expressing all the contributions to the time derivative of total angular momentum with the respect to the base reference frame:
@@ -360,13 +493,207 @@ We expect this feature will allows the stabilization of the yaw to a desired val
 A control strategy that may lead to the same result is dynamic feedback linearization, widely used for flight with quadricopters.
 
 
+-------------------------------------------------------------------------------
 
-\small
-\section*{Acknowledgements}	
-All the authors want to thank Dr. Roy Featherstone for interesting tips that started this work. 
-\newline
-The publication was created with the co-financing of the European Union FSE-REACT-EU, PON Research and Innovation 2014-2020 DM1062 / 2021.
+\section{Introduction}
 
-\bibliography{references/bibliography}
-%\printbibliography
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Materials and Methods}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Results}
+ 
+
+\subsection{Figures, Tables and Schemes}
+
+All figures and tables should be cited in the main text as Figure~\ref{fig1}, Table~\ref{tab1}, Table~\ref{tab2}, etc.
+
+\begin{figure}[H]
+\includegraphics[width=10.5 cm]{Definitions/logo-mdpi}
+\caption{This is a figure. Schemes follow the same formatting. If there are multiple panels, they should be listed as: (\textbf{a}) Description of what is contained in the first panel. (\textbf{b}) Description of what is contained in the second panel. Figures should be placed in the main text near to the first time they are cited. A caption on a single line should be centered.\label{fig1}}
+\end{figure}   
+\unskip
+
+\begin{table}[H] 
+\caption{This is a table caption. Tables should be placed in the main text near to the first time they are~cited.\label{tab1}}
+\newcolumntype{C}{>{\centering\arraybackslash}X}
+\begin{tabularx}{\textwidth}{CCC}
+\toprule
+\textbf{Title 1}	& \textbf{Title 2}	& \textbf{Title 3}\\
+\midrule
+Entry 1		& Data			& Data\\
+Entry 2		& Data			& Data\\
+\bottomrule
+\end{tabularx}
+\end{table}
+\unskip
+
+\begin{table}[H]
+\caption{This is a wide table.\label{tab2}}
+	\begin{adjustwidth}{-\extralength}{0cm}
+		\newcolumntype{C}{>{\centering\arraybackslash}X}
+		\begin{tabularx}{\fulllength}{CCCC}
+			\toprule
+			\textbf{Title 1}	& \textbf{Title 2}	& \textbf{Title 3}     & \textbf{Title 4}\\
+			\midrule
+			Entry 1		& Data			& Data			& Data\\
+			Entry 2		& Data			& Data			& Data \textsuperscript{1}\\
+			\bottomrule
+		\end{tabularx}
+	\end{adjustwidth}
+	\noindent{\footnotesize{\textsuperscript{1} This is a table footnote.}}
+\end{table}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Discussion}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Conclusions}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Patents}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\vspace{6pt} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% optional
+%\supplementary{The following supporting information can be downloaded at:  \linksupplementary{s1}, Figure S1: title; Table S1: title; Video S1: title.}
+
+% Only for the journal Methods and Protocols:
+% If you wish to submit a video article, please do so with any other supplementary material.
+% \supplementary{The following supporting information can be downloaded at: \linksupplementary{s1}, Figure S1: title; Table S1: title; Video S1: title. A supporting video article is available at doi: link.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ 
+\authorcontributions{Conceptualization, F.R. and M.F.; software, F.R., A.C. and M.F.; validation, F.R., A.C. and M.F.; formal analysis, F.R., A.C. and M.F.; investigation, F.R. and A.C.; resources, C.S.; data curation, F.R., A.C. and M.F.; writing---original draft preparation, F.R.; writing---review and editing, F.R., A.C., A.D.P., C.S. and M.F.; visualization, F.R. and A.C.; supervision, A.D.P. and M.F; project administration, F.R. and M.F.; funding acquisition, \FR{?}. All authors have read and agreed to the published version of the manuscript.}
+%\authorcontributions{For research articles with several authors, a short paragraph specifying their individual contributions must be provided. The following statements should be used ``Conceptualization, X.X. and Y.Y.; methodology, X.X.; software, X.X.; validation, X.X., Y.Y. and Z.Z.; formal analysis, X.X.; investigation, X.X.; resources, X.X.; data curation, X.X.; writing---original draft preparation, X.X.; writing---review and editing, X.X.; visualization, X.X.; supervision, X.X.; project administration, X.X.; funding acquisition, Y.Y. All authors have read and agreed to the published version of the manuscript.'', please turn to the  \href{http://img.mdpi.org/data/contributor-role-instruction.pdf}{CRediT taxonomy} for the term explanation. Authorship must be limited to those who have contributed substantially to the work~reported.}
+
+\funding{The publication was created with the co-financing of the European Union FSE-REACT-EU, PON Research and Innovation 2014-2020 DM1062 / 2021.}
+
+\institutionalreview{Not applicable.}
+
+\informedconsent{Not applicable.}
+
+\dataavailability{Not applicable.} 
+
+\acknowledgments{All the authors want to thank Dr. Roy Featherstone for interesting tips that started this work. }
+
+\conflictsofinterest{The authors declare no conflict of interest.} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Optional
+%\sampleavailability{Samples of the compounds ... are available from the authors.}
+
+%% Only for journal Encyclopedia
+%\entrylink{The Link to this entry published on the encyclopedia platform.}
+
+\abbreviations{Abbreviations}{
+The following abbreviations are used in this manuscript:\\
+
+\noindent 
+\begin{tabular}{@{}ll}
+CoM & Center Of Mass\\
+OCS & Orientation Control System\\
+CMG & Control Moment Gyroscope\\
+NMPC & Nonlinear Model Predictive Control
+\end{tabular}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Optional
+%\appendixtitles{no} % Leave argument "no" if all appendix headings stay EMPTY (then no dot is printed after "Appendix A"). If the appendix sections contain a heading then change the argument to "yes".
+%\appendixstart
+%\appendix
+%\section[\appendixname~\thesection]{}
+%\subsection[\appendixname~\thesubsection]{}
+%The appendix is an optional section that can contain details and data supplemental to the main text---for example, explanations of experimental details that would disrupt the flow of the main text but nonetheless remain crucial to understanding and reproducing the research shown; figures of replicates for experiments of which representative data are shown in the main text can be added here if brief, or as Supplementary Data. Mathematical proofs of results not central to the paper can be added as an appendix.
+
+%\begin{table}[H] 
+%\caption{This is a table caption.\label{tab5}}
+%\newcolumntype{C}{>{\centering\arraybackslash}X}
+%\begin{tabularx}{\textwidth}{CCC}
+%\toprule
+%\textbf{Title 1}	& \textbf{Title 2}	& \textbf{Title 3}\\
+%\midrule
+%Entry 1		& Data			& Data\\
+%Entry 2		& Data			& Data\\
+%\bottomrule
+%\end{tabularx}
+%\end{table}
+
+%\section[\appendixname~\thesection]{}
+%All appendix sections must be cited in the main text. In the appendices, Figures, Tables, etc. should be labeled, starting with ``A''---e.g., Figure A1, Figure A2, etc.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{adjustwidth}{-\extralength}{0cm}
+%\printendnotes[custom] % Un-comment to print a list of endnotes
+
+\reftitle{References}
+
+% Please provide either the correct journal abbreviation (e.g. according to the “List of Title Word Abbreviations” http://www.issn.org/services/online-services/access-to-the-ltwa/) or the full name of the journal.
+% Citations and References in Supplementary files are permitted provided that they also appear in the reference list here. 
+
+%=====================================
+% References, variant A: external bibliography
+%=====================================
+\bibliography{references/bibliography.bib}
+
+%=====================================
+% References, variant B: internal bibliography
+%=====================================
+%\begin{thebibliography}{999}
+% Reference 1
+%\bibitem[Author1(year)]{ref-journal}
+%Author~1, T. The title of the cited article. {\em Journal Abbreviation} {\bf 2008}, {\em 10}, 142--149.
+% Reference 2
+%\bibitem[Author2(year)]{ref-book1}
+%Author~2, L. The title of the cited contribution. In {\em The Book Title}; Editor 1, F., Editor 2, A., Eds.; Publishing House: City, Country, 2007; pp. 32--58.
+% Reference 3
+%\bibitem[Author3(year)]{ref-book2}
+%Author 1, A.; Author 2, B. \textit{Book Title}, 3rd ed.; Publisher: Publisher Location, Country, 2008; pp. 154--196.
+% Reference 4
+%\bibitem[Author4(year)]{ref-unpublish}
+%Author 1, A.B.; Author 2, C. Title of Unpublished Work. \textit{Abbreviated Journal Name} year, \textit{phrase indicating stage of publication (submitted; accepted; in press)}.
+% Reference 5
+%\bibitem[Author5(year)]{ref-communication}
+%Author 1, A.B. (University, City, State, Country); Author 2, C. (Institute, City, State, Country). Personal communication, 2012.
+% Reference 6
+%\bibitem[Author6(year)]{ref-proceeding}
+%Author 1, A.B.; Author 2, C.D.; Author 3, E.F. Title of presentation. In Proceedings of the Name of the Conference, Location of Conference, Country, Date of Conference (Day Month Year); Abstract Number (optional), Pagination (optional).
+% Reference 7
+%\bibitem[Author7(year)]{ref-thesis}
+%Author 1, A.B. Title of Thesis. Level of Thesis, Degree-Granting University, Location of University, Date of Completion.
+% Reference 8
+%\bibitem[Author8(year)]{ref-url}
+%Title of Site. Available online: URL (accessed on Day Month Year).
+%\end{thebibliography}
+
+% If authors have biography, please use the format below
+%\section*{Short Biography of Authors}
+%\bio
+%{\raisebox{-0.35cm}{\includegraphics[width=3.5cm,height=5.3cm,clip,keepaspectratio]{Definitions/author1.pdf}}}
+%{\textbf{Firstname Lastname} Biography of first author}
+%
+%\bio
+%{\raisebox{-0.35cm}{\includegraphics[width=3.5cm,height=5.3cm,clip,keepaspectratio]{Definitions/author2.jpg}}}
+%{\textbf{Firstname Lastname} Biography of second author}
+
+% For the MDPI journals use author-date citation, please follow the formatting guidelines on http://www.mdpi.com/authors/references
+% To cite two works by the same author: \citeauthor{ref-journal-1a} (\citeyear{ref-journal-1a}, \citeyear{ref-journal-1b}). This produces: Whittaker (1967, 1975)
+% To cite two works by the same author with specific pages: \citeauthor{ref-journal-3a} (\citeyear{ref-journal-3a}, p. 328; \citeyear{ref-journal-3b}, p.475). This produces: Wong (1999, p. 328; 2000, p. 475)
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% for journal Sci
+%\reviewreports{\\
+%Reviewer 1 comments and authors’ response\\
+%Reviewer 2 comments and authors’ response\\
+%Reviewer 3 comments and authors’ response
+%}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{adjustwidth}
 \end{document}
+
