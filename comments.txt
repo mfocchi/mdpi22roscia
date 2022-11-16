@@ -1,0 +1,74 @@
+ ##############
+# REVIEW2317 #
+##############
+---> My biggest concern is the amount of contribution, the idea of using flywheels to control the orientation of a robot is not new and the developments leading to the final design seem rather simple. Since there is no implementation of the real platform yet, I think that the authors should make the contribution really clear, especially compared to existing solutions, many of which have been successfully implemented on real platforms and including with incident axes (a nice example is Cubli, 10 years ago).
+<--- Use two flywheels to control a quadruped. The axes are not parallel to inertia tensor's main axes, thus we have to actuate both the flywheels to control both the directions. 
+
+
+/*
+ *---> Authors say that tails have large impact to the total angular momentum. I see what they mean, but this sentence  goes against the conservation of the total angular momentum.
+ *<--- Total inertia
+ */
+
+---> Authors said that the axes of the flywheel pass through the CoM, is it the case in this simulation?
+<---
+
+
+---> The quaternions are said to be used to avoid singular configurations, but since errors were using the algebra of SO(3) i believe that singularities are not a problem anymore, except if I missed something.
+<--- This comment is not clear to me
+
+
+---> I think that the simulations assume a perfect tracking of the desired velocities and a perfect estimation of the orientation. These hypotheses need to be discussed.
+<--- 
+
+
+---> The video is good because it shows the results of the simulation, but a big part of it is a presentation of the work that is redundant with the paper, I suggest to reduce its duration.
+<--- Mhhh, not convincing
+
+
+##############
+# REVIEW2543 #
+##############
+/*---> The introduction section claims that legs are light and have a small effect on total angular momentum. After reviewing the hardware specifications of the Solo12 robot, the legs account for a
+ *significant percentage (about 33%) of the total mass. The four legs can be extended or retracted in different directions, which has a significant impact on the overall angular momentum.
+ *<--- 1. Each leg accounts for approx 13.7% of the total mass but only 7.5% is usable (the rest is hip and it can be considered unmuvable)
+ *2. The OCS is thought to be platform independent (prove of concept), then it is not relevant the amount of mass of this specific robot
+ *3. Since the legs are controlled for specific tasks (e.g., gait), the sequential movements of the legs won't allow to easily use the legs for this purpose.
+ */
+
+
+---> Fig. 3 can be updated by scaling gamma_max to the maximum of 400 (instead of 1000) and assuming the base velocity variation starting from 2, which makes the graph clearer.
+<---
+
+---> Fig. 7 shows the design of the wheel, which is not required and can be omitted. 
+<--- ?
+
+
+---> For Table 1:- Some values and parameters are unnecessary for the purpose of the work. r, R, h and ro: these values are not important. the mass and inertia_zz are sufficient to be shown here, other values should be eliminated. - Specify the maximum torque and speed of the motor you used in the simulation for the evaluation.
+<---
+
+
+---> Equation 8, formulates I_xx and I_yy, which are not used anywhere and should be eliminated. If you have decided to remove Fig. 7, the entire equation can be removed. Please rephrase the paragraph after equation 8, something like this: Our flywheel design has spokes with negligible mass to connect the rotating wheel to the motor shaft. The wheel has a parameterization in Fig. 7 that can be adjusted and selected to meet the requirements of the application.
+<---
+
+
+---> In section III. C, second equation, did you mean omega_r instead of omega_b ?!
+<--- I meant b_omega_r, as it is (rotation of the robot wrt its base frame). Maybe I have to move its definition
+
+
+---> Fig. 8: Please insert a vertical line at 0.1s indicating the occurred disturbance.
+<---
+
+
+---> Evaluation: A robot doing a backflip may not be exactly a space application. It is better to say that flywheels are much more effective in space applications due to the lower gravitational force and the resulting longer flight time. - One of the advantages listed is the significant reduction in the robot's oscillation when performing dynamic motions (e.g., trotting). However, this is not evaluated in the paper. Include an evaluation showing what improvements OCS achieves when the robot trots. This is very important because in such a gait, the quadrupeds are forced to change contact legs at high frequency to maintain control of the robot. the longer the robot stays in an underactuated situation, the more it will deviate from the reference trajectory and eventually fall. - The results depend strongly on the maximum possible torque of the flywheel motors. Please provide some information about this. - For each evaluation, please add a diagram with the calculated control results (torques of the wheels) and their velocities.
+<---
+
+---> Comments on the Video Attachment. The video can be improved by adding: - a graph for the orientation error, and the robot's angular velocity - graphs for the control vector u (the torque applied on
+the wheels) - a simulation of a dynamic gait (e.g. trot) that is stabilized u
+
+
+
+
+
+
+
