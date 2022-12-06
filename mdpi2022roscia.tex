@@ -220,7 +220,7 @@ The benefits of this kind of \gls{ocs} are multiple.
 \begin{enumerate}
 \item Flywheels can correct orientation errors during the flight (e.g. due to disturbances or tracking inaccuracies in the angular momentum achieved at the lift-off)   % and non-idealities).  
 in a continuous manner. 
-\item They enable to track a time-varying reference (e.g. to have the robot land with a desired angular velocity (possibly zero) and orientation).
+\item They enable to track a time-varying reference, e.g. to have the robot land with a desired angular velocity (possibly zero) and orientation.
 \item  Even in presence of contacts, they can enhance the landing phase or stabilize dynamic gaits (e.g. trot), by significantly reducing trunk oscillations.  
 \item  The presence of these additional joints, whose only function is to control the orientation, gives the possibility to relieve the effort of the legs.
 \end{enumerate}
@@ -443,8 +443,8 @@ track base orientation references using the control law introduced in Subsection
 
 \begin{figure}[t!]
 	\centering
-	\includegraphics[width=.7\linewidth]{figures/fw_jump.eps}
-	\caption{\small First Test: simulation results showing the $\mathrm{CoM}_x$ and pitch trajectory vs. time plots. A disturbance moment $\bm{\tau}_{dist}$ on the trunk can be compensated only if the \gls{ocs} is enabled. If it is disabled, the robot is unable to restore a safe configuration after the touch-down and eventually falls.}
+	\includegraphics[width=.7\linewidth]{figures/drawing.png}
+	\caption{\small First Test: simulation results showing the $\mathrm{CoM}_x$ and pitch trajectory vs. time plots. A disturbance moment $\bm{\tau}_{dist}$ on the trunk can be compensated only if the \gls{ocs} is enabled. If it is disabled, the robot is unable to restore a safe configuration after the touch-down and eventually falls. The light blue area represents the interval of time in which the disturbance is applied.}
 	\label{fig:fw_jump}
 \end{figure}
 \begin{figure}[H]
