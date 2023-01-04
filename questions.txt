@@ -1,0 +1,18 @@
+Questions
+
+Q1. Extend the text of the manuscript (e.g. introduction or conclusion) with specific results in the world and Europe, - Improve the quality of the paper by presenting the results of publivations by researchers and experts who are involved in this field and registered in world databases (wos). These are e.g: Measurement of industrial robot pose repeatability, Investigation of snake robot locomotion possibilities in a pipe, thanks.
+
+A1. Da quello che ho capito wos è simile a google schoolar ma indicizza pochi risultati per robotica quadrupede (per capire, non ci sono né Claudio, né Hutter fra gli autori indicizzati). 
+Non ho capito che devo farci coi paper che cita, non sono per nulla correlati col nostro lavoro: Measurement of industrial robot pose repeatability (https://www.matec-conferences.org/articles/matecconf/abs/2018/103/matecconf_itep2018_01015/matecconf_itep2018_01015.html) e Investigation of Snake Robot Locomotion Possibilities in a Pipe (https://www.mdpi.com/2073-8994/12/6/939)
+
+Q2. Conclusions and future work should be extended to contain practical applications based on reasearch described in this paper - expand references.
+A2. Ho aumentato le reference (certe erano state tolte per humanoids e ne ho messe di nuove. Da 21 ora sono 29). Come practical application non so che mettere onestamente, in tutto il paper si parla di stabilizazzione e tracking di orientamento 
+
+Q3. Standardisation of literature input (into one style)
+A3. Già era in uso il formato di mdpi sensors. Se non gli piace sto formato io non so che fare...
+
+Q4. The authors should give more details regardin the next sentence, being crucial for the paper outputs: "The robot full dynamics is modeled with Pinocchio". [...] Sinche the simulator models the robot dynamics, why use Pinocchio software?
+A4. 
+
+Q5. Ide for robot code development
+A5. Ho messo che il controllore è scritto in Python. Dire che usiamo come IDE PyCharm mi sembra irrilevante
