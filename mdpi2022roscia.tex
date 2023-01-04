@@ -321,9 +321,9 @@ To remove unnecessary complications, we designed two identical modules, to be mo
 maps the flywheel moments into scalar torques $\bm{u} = \left[\begin{array}{cc} \tau_{fl} & \tau_{fr} \end{array} \right]^T$ about the flywheel axes $\hat{\bm{a}}_l$ and $\hat{\bm{a}}_r$ (expressed in the base frame).
 As long as $\bm{C}$ is full column rank, it is possible to control both roll and pitch angles. If $\alpha = 0$, the roll results to be uncontrollable through the \gls{ocs}; otherwise, if $\alpha = \pi/2$, the pitch is uncontrollable. 
 The angle is selected considering the ratio of the eigenvalues along the $x$ and $y$ directions of the ellipsoid of the robot inertia(Fig. \ref{fig:ellipsoid}):
-\begin{equation*}
+\MF{\begin{equation}
 \alpha^{*}=\tan^{-1}\left(\dfrac{I_{r, xx}}{I_{r, yy}}\right).
-\end{equation*}
+\end{equation}}
 \begin{figure}[t]
 	\centering
 	\includegraphics[width=1\linewidth]{figures/inertiaEllipsoid.eps}
@@ -411,22 +411,22 @@ The parameters $R$ and $h$ can be set to have a compact \gls{ocs} and $\rho$ dep
 \subsection{Flywheels Control Law}
 \label{subsec:control_law}
 To derive a control law based on the robot base orientation, we make use of \eqref{eq:cons_ang_mom}, expressing all the contributions to the time derivative of total angular momentum with the respect to the base reference frame:
-\begin{equation*}
+\MF{\begin{equation}
 \tensor[_b]{\bm{I}}{_f} \, \tensor[_b]{\dot{\bm{\omega}}}{_f} + \tensor[_b]{\bm{I}}{_r} \tensor[_b]{\dot{\bm{\omega}}}{_r} + \tensor[_b]{\bm{\omega}}{_r} \times \left( \tensor[_b]{\bm{I}}{_r} \tensor[_b]{\bm{\omega}}{_r}\right) = 0
-\end{equation*}
+\end{equation}}
 From this expression, we can define the moment on the base caused by the acceleration of the flywheels, that can be used as a feedback torque $\bm{\tau}_{fb}$:
-\begin{equation*}
+\MF{\begin{equation}
 \begin{split}
 \bm{\tau}_{fb} &= \bm{I}_f \dot{\bm{\omega}}_f \\
 &= - \tensor[_b]{\bm{I}}{_r} \dot{\bm{\omega}}_b - \tensor[_b]{\bm{\omega}}{_r} \times \left( \tensor[_b]{\bm{I}}{_r} \tensor[_b]{\bm{\omega}}{_r}\right)
 \end{split}
-\end{equation*}
+\end{equation}}
 We can use the \MF{proportional and derivative} action $\bm{K}_p \bm{e} + \bm{K}_d \dot{\bm{e}_r}$, where $\bm{K}_p$ and $\bm{K}_d$ are diagonal and positive-definite gain matrices for the error in attitude and angular velocity.
 The orientation error $\bm{e} \in SO(3)$ needs the algebra of the special rotational group to be computed. To avoid singular configurations, we represent the orientation with quaternions.
 The derivative error can be computed using $\dot{\bm{e}} = \tensor[_b]{\bm{\omega}}{_r^{des}} - \tensor[_b]{\bm{\omega}}{_r}$, in which $\tensor[_b]{\bm{\omega}}{_r^{des}}$ and $\tensor[_b]{\bm{\omega}}{_r}$ are, respectively, the desired and actual angular velocity of the base:
-\begin{equation*}
+\MF{\begin{equation}
 \bm{\tau}_{fb} = - \tensor[_b]{\bm{I}}{_r} \left(\bm{K}_p \bm{e} + \bm{K}_d \dot{\bm{e}}\right) - \tensor[_b]{\bm{\omega}}{_r} \times \left( \tensor[_b]{\bm{I}}{_r} \tensor[_b]{\bm{\omega}}{_r}\right).
-\end{equation*}
+\end{equation}}
 Projecting the moment $\bm{\tau}_{fb}$ onto the flywheel axes with $\bm{C}^T$, we obtain the control action $\bm{u}$
 \begin{equation}
 \label{eq:ctrl_law}
