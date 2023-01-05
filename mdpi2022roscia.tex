@@ -70,7 +70,8 @@
 %\input{includes/math_commands.tex}
 %\input{includes/newcommands.tex}
 
-\newcommand{\MF}[1]{\textcolor{red}{\textbf{mfocchi}: #1}}
+\newcommand{\MF}[1]{\textcolor{red}{#1}}
+%\newcommand{\MF}[1]{\textcolor{black}{#1}}
 \newcommand{\CS}[1]{\textcolor{violet}{\textbf{csemini}: #1}}
 \newcommand{\FR}[1]{\textcolor{teal}{\textbf{froscia}: #1}}
 \newcommand{\ADP}[1]{\textcolor{blue}{\textbf{adelprete}: #1}}
@@ -121,7 +122,7 @@ $^{3}$ \quad Department of Information Engineering and Computer Science (DISI), 
 %\conference{} % An extended version of a conference paper
 
 % Abstract (Do not insert blank lines, i.e. \\) 
-\abstract{For legged robots, aerial motions are the only option to overpass obstacles that cannot be circumvent with standard locomotion gaits. In these cases, the robot must perform a leap to either jump onto the obstacle or fly over it. However, these movements represent a challenge because during the flight phase the \gls{com} cannot be controlled, and the robot orientation has limited controllability. This paper focuses on the latter issue and proposes an \gls{ocs} consisting of two rotating and actuated masses (flywheels or reaction wheels) to gain control authority on the robot orientation. Because of the conservation of angular momentum, their rotational velocity can be adjusted to steer the robot orientation even when there are no contacts with the ground. The axes of rotation of the flywheels are designed to be incident, leading to a compact orientation control system that is capable of controlling both roll and pitch angles, considering the different moment of inertia in the two directions. We tested the concept with simulations on the robot Solo12.}
+\abstract{For legged robots, aerial motions are the only option to overpass obstacles that cannot be circumvent with standard locomotion gaits. In these cases, the robot must perform a leap to either jump onto the obstacle or fly over it. However, these movements represent a challenge because during the flight phase the \gls{com} cannot be controlled, and the robot orientation has limited controllability. This paper focuses on the latter issue and proposes an \gls{ocs} consisting of two rotating and actuated masses (flywheels or reaction wheels) to gain control authority on the robot orientation. Because of the conservation of angular momentum, their rotational velocity can be adjusted to steer the robot orientation even when there are no contacts with the ground. The axes of rotation of the flywheels are designed to be incident, leading to a compact orientation control system that is capable of controlling both roll and pitch angles, considering the different moment of inertia in the two directions. \MF{The concept is tested with simulations on the robot Solo12.}}
 
 \makeglossaries
 % Keywords
@@ -184,14 +185,6 @@ However, sometimes it is not possible to get around or over an obstacle with the
 
 When the robot is in the air, the \gls{com} moves on the ballistic trajectory, that is completely defined by the lift-off position and velocity. On the other hand, the base orientation can be changed exploiting the conservation of the system angular momentum. This means that it is possible to control the base angular velocity by changing the inertia of the robot, e.g., changing the joints configuration. Nevertheless, the majority of quadrupeds are designed with light legs, resulting in limbs that have small influence on the total angular momentum.
 
-\begin{figure}[t!]
-	\centering
-	\includegraphics[width=7cm,height=8cm,keepaspectratio]{figures/solo_fw_pic_compressed.png}
-	\caption{\small The proposed Orientation Control System for 
-		for the $2.5 \ \mathrm{kg}$ quadruped robot Solo12 consists of two $0.1 \ \mathrm{kg}$ flywheels with incident rotation axes. Each wheel is located in a 3D-printed shell and mounted on the trunk body.}
-	\label{fig:solo12flywheels}
-\end{figure} 
-
 Quadrupedal animals, like cats, can rearrange tail and trunk to correct the orientation during a fall \cite{kane1969dynamical}.
 % Tail
 Many works in the field of robotics used an additional link as a tail, like in \cite{chu2019null} and \cite{wenger2016frontal}.
@@ -227,7 +220,14 @@ In more complex scenarios, like for a somersault, limbs and \gls{ocs} can operat
 
 
 \subsection{Proposed Approach and Contribution}
-In this work, we \MF{introduce} a compact \gls{ocs} based on two flywheels, mounted on the trunk of the lightweight quadruped Solo12 \cite{grimminger2020open}. \MF{The open-source hardware and software are reported in \cite{github_solo}. Fig. \ref{fig:solo12flywheels} shows the \gls{ocs} mounted on the trunk of the robot. }
+\begin{figure}[t!]
+	\centering
+	\includegraphics[width=7cm,height=8cm,keepaspectratio]{figures/solo_fw_pic_compressed.png}
+	\caption{\small The proposed Orientation Control System for 
+		for the $2.5 \ \mathrm{kg}$ quadruped robot Solo12 consists of two $0.1 \ \mathrm{kg}$ flywheels with incident rotation axes. Each wheel is located in a 3D-printed shell and mounted on the trunk body.}
+	\label{fig:solo12flywheels}
+\end{figure} 
+\MF{This work introduces} a compact \gls{ocs} based on two flywheels, mounted on the trunk of the lightweight quadruped Solo12 \cite{grimminger2020open}. \MF{The open-source hardware and software are reported in \cite{github_solo}. Fig. \ref{fig:solo12flywheels} shows the \gls{ocs} mounted on the trunk of the robot. }
 The contributions of the paper are:
 \begin{itemize}
 	\item the design of a novel \gls{ocs} that enables to control the orientation of a legged robot during a jump in an effective way, while keeping the design simple. 
@@ -262,31 +262,31 @@ As an example, let consider the case of Solo12. Even if each limb accounts for a
 
 \section{Orientation Control System}
 \label{sec:ocs}
-In this section, we present a procedure to select the inertia of the flywheels, and we show how to exploit them for simultaneously controlling the robot roll and pitch orientation.
+In this section, a procedure to select the inertia of the flywheels \MF{is presented, together with a strategy} to exploit them for simultaneously controlling the robot roll and pitch orientation.
 
 
 \subsection{Bounds on the Inertia}
 Investigation for the selection of the flywheels' inertia can be performed with the Elroy's Beanie model, depicted in Fig. \ref{fig:elroy-beanie}.
-\begin{figure}
+\begin{figure}[t!]
 	\centering
 	\includegraphics[width=.7\linewidth]{figures/elroys-beanie.eps}
 	\caption{\small Schematic representation of the Elroy's Beanie model used for the preliminary analysis of the pitch motion.}
 	\label{fig:elroy-beanie}
 \end{figure} 
-\begin{figure}
+\begin{figure}[t]
 	\centering
 	\includegraphics[width=.8\linewidth]{figures/lowerbound2.eps}
 	\caption{\small Minimum inertia of the \gls{ocs} (normalized by the robot inertia) necessary to achieve a base velocity variation $\Delta \dot{\theta}$, given the actuation bound $\dot \gamma^{max}$.}
 	\label{fig:inertia_limits}
 \end{figure}
-This consists of two rigid bodies connected through their \gls{com} with a revolute joint. One of the bodies represents the robot in its nominal configuration. The other models the \gls{ocs}, here represented by a single wheel for the sake of simplicity. The aim is to examine the rotational dynamics of the system as a whole. To simplify the analysis, in the following we will refer only to the effects on the pitch angle of the robot, keeping in mind that the same arguments apply also to the roll. 
+This consists of two rigid bodies connected through their \gls{com} with a revolute joint. One of the bodies represents the robot in its nominal configuration. The other models the \gls{ocs}, here represented by a single wheel for the sake of simplicity. The aim is to examine the rotational dynamics of the system as a whole. To simplify the analysis, in the following \MF{only the effects on the pitch angle of the robot is considered}, keeping in mind that the same arguments apply also to the roll. 
 Let us identify the moment of inertia of the robot in the nominal configuration as $I_r$ and the moment of inertia of the two flywheels as $I_f$, both referred to the system \gls{com}.
 The angular momentum $L$ of this system can be written as
 \begin{equation}\label{eq:ang_mom_elroy}
 L(t) = \left(I_r + I_{f}\right)\dot{\theta}(t) + I_{f}\dot{\gamma}(t)
 \end{equation}
 where $\dot{\theta}$ and $\dot{\gamma}$ are respectively the robot pitch rate and the angular speed of the wheel.
-We want to drive the robot to a desired pitch rate $\dot{\theta}_{des}$ by acting on the wheel speed.
+\MF{The robot is driven to reach} a desired pitch rate $\dot{\theta}_{des}$ by acting on the wheel speed.
 Without loss of generality, \MF{one} can assume the flywheel is stationary with the robot at the instant at which the reorientation maneuver starts ($\dot{\gamma}_0 = 0$), having a system angular momentum of $L_0 = \left(I_r + I_{f}\right)\dot{\theta}_0$.
 Under the condition of conservation of the angular momentum, this quantity is constant over time and it is possible to estimate the lower bound for $I_{f}$ given a desired pitch rate and the maximum velocity of the flywheels $\dot{\gamma}_{max}$:
 \begin{equation}
@@ -306,7 +306,7 @@ Fig. \ref{fig:inertia_limits} reports the lower bound of $I_{f}$ given the desir
 	\label{fig:axes}
 \end{figure}
 The orientation of the axis of rotation of each flywheel influences their contribution to the total angular momentum. To meet the specification of controlling both the robot roll and pitch, the axes of rotation of the left and right wheel, identified in the base reference frame with the unit vectors $\hat{\bm{a}}_l$ and $\hat{\bm{a}}_r$, are set to be incident, laying on a plane parallel to the $xy-$plane of the base reference frame (see Fig. \ref{fig:axes}). 
-To remove unnecessary complications, we designed two identical modules, to be mounted on the trunk of Solo12, symmetrically with the respect of the robot sagittal plane. We denote with $\alpha \leq \pi/2$ the non-negative incident angle between the wheels' axes of rotation and the robot lateral direction. The matrix 
+To remove unnecessary complications, \MF{the authors} designed two identical modules, to be mounted on the trunk of Solo12, symmetrically with the respect of the robot sagittal plane. \MF{Let} denote with $\alpha \leq \pi/2$ the non-negative incident angle between the wheels' axes of rotation and the robot lateral direction. The matrix 
 \begin{equation}
 \bm{C} = 
 \left[ \begin{array}{cc}
@@ -373,7 +373,7 @@ in which $\bm{\omega}_{fl}= \omega_{fl} \, \hat{\bm{a}}_{l}$ and $\bm{\omega}_{f
 
 \subsection{Inertia Selection}
 Once the desired inertia $I_f$ is chosen, according to the 2D Elroy's Beanie model, it is used to realize the 3D \gls{ocs} (Fig. \ref{fig:flywheel}). 
-We decided to design the flywheels in the shape of hollow cylinders. This shape increases the inertia by locating the mass far away from the rotation axis. The inertia tensor expressed in its principal axes, $\bm{I}_f = \mathrm{diag}\left\{ I_{f, xx}, \, I_{f, yy}, \, I_{f, zz}  \right\}$, depends on the cylinders inner and outer radii, $r$ and $R$, its height $h$ and the material density $\rho$:
+\MF{Two identical flywheels are designed to have} the shape of hollow cylinders. This shape increases the inertia by locating the mass far away from the rotation axis. The inertia tensor expressed in its principal axes, $\bm{I}_f = \mathrm{diag}\left\{ I_{f, xx}, \, I_{f, yy}, \, I_{f, zz}  \right\}$, depends on the cylinders inner and outer radii, $r$ and $R$, its height $h$ and the material density $\rho$:
 \begin{equation}
 \begin{split}
 I_{f, xx} = I_{f, yy} &= \frac{1}{12}\pi \rho h \left(3\left(R^4 - r^4\right) + h^2\left(R^2 - r^2\right)\right) \\
@@ -382,7 +382,13 @@ I_{f, zz} &= \frac{1}{2}\pi \rho h \left(R^4 - r^4\right)
 \end{equation}
 Notice that in the Elroy's Beanie model, there is a single body that models the complete \gls{ocs}. The inertia introduced in the Elroy's Beanie model has to be split between the two flywheels: $I_{f, zz} = I_f/\left(2\cos(\alpha)\right)$. 
 The parameters $R$ and $h$ can be set to have a compact \gls{ocs} and $\rho$ depends on the chosen material, that is stainless steel in our case. The inner radius $r$ can be adjusted to obtain the desired inertia. Spokes with negligible mass connect the wheel to the motor shaft. All the parameters are reported in Table \ref{tab:dim_fw}, together with the selected inertia and mass of a single flywheel.
-\begin{table}[H] 
+\begin{figure}[t!]
+	\centering
+	\includegraphics[width=7cm,height=8cm,keepaspectratio]{figures/flywheel_opaque.png}
+	\caption{\small The final design of the flywheel, shown together with its inertia principal axes. Here, $h$ is the wheel thickness, $r$ is the inner radius of the wheel and $R$ is the outer one.}
+	\label{fig:flywheel}
+\end{figure}
+\begin{table}[t] 
 	\caption{Sizes and dynamic parameters of a single flywheel}
 	\label{tab:dim_fw}
 	\newcolumntype{C}{>{\centering\arraybackslash}X}
@@ -399,12 +405,6 @@ The parameters $R$ and $h$ can be set to have a compact \gls{ocs} and $\rho$ dep
 		$I_{zz}$   & $7.11 \cdot 10^{-5}$ & $ \mathrm{kg \cdot m^2}$\\
 		\bottomrule	\end{tabularx}
 \end{table}
-\begin{figure}[t!]
-	\centering
-	\includegraphics[width=7cm,height=8cm,keepaspectratio]{figures/flywheel_opaque.png}
-	\caption{\small The final design of the flywheel, shown together with its inertia principal axes. Here, $h$ is the wheel thickness, $r$ is the inner radius of the wheel and $R$ is the outer one.}
-	\label{fig:flywheel}
-\end{figure}
 \unskip
 
 
@@ -414,20 +414,20 @@ To derive a control law based on the robot base orientation, we make use of \eqr
 \MF{\begin{equation}
 \tensor[_b]{\bm{I}}{_f} \, \tensor[_b]{\dot{\bm{\omega}}}{_f} + \tensor[_b]{\bm{I}}{_r} \tensor[_b]{\dot{\bm{\omega}}}{_r} + \tensor[_b]{\bm{\omega}}{_r} \times \left( \tensor[_b]{\bm{I}}{_r} \tensor[_b]{\bm{\omega}}{_r}\right) = 0
 \end{equation}}
-From this expression, we can define the moment on the base caused by the acceleration of the flywheels, that can be used as a feedback torque $\bm{\tau}_{fb}$:
+From this expression, the moment on the base caused by the acceleration of the flywheels \MF{is defined}, that can be used as a feedback torque $\bm{\tau}_{fb}$:
 \MF{\begin{equation}
 \begin{split}
 \bm{\tau}_{fb} &= \bm{I}_f \dot{\bm{\omega}}_f \\
 &= - \tensor[_b]{\bm{I}}{_r} \dot{\bm{\omega}}_b - \tensor[_b]{\bm{\omega}}{_r} \times \left( \tensor[_b]{\bm{I}}{_r} \tensor[_b]{\bm{\omega}}{_r}\right)
 \end{split}
 \end{equation}}
-We can use the \MF{proportional and derivative} action $\bm{K}_p \bm{e} + \bm{K}_d \dot{\bm{e}_r}$, where $\bm{K}_p$ and $\bm{K}_d$ are diagonal and positive-definite gain matrices for the error in attitude and angular velocity.
-The orientation error $\bm{e} \in SO(3)$ needs the algebra of the special rotational group to be computed. To avoid singular configurations, we represent the orientation with quaternions.
+\MF{Proportional and derivative} action $\bm{K}_p \bm{e} + \bm{K}_d \dot{\bm{e}_r}$ \MF{is used}, where $\bm{K}_p$ and $\bm{K}_d$ are diagonal and positive-definite gain matrices for the error in attitude and angular velocity.
+The orientation error $\bm{e} \in SO(3)$ needs the algebra of the special rotational group to be computed. To avoid singular configurations, orientation \MF{are represented} with quaternions.
 The derivative error can be computed using $\dot{\bm{e}} = \tensor[_b]{\bm{\omega}}{_r^{des}} - \tensor[_b]{\bm{\omega}}{_r}$, in which $\tensor[_b]{\bm{\omega}}{_r^{des}}$ and $\tensor[_b]{\bm{\omega}}{_r}$ are, respectively, the desired and actual angular velocity of the base:
 \MF{\begin{equation}
 \bm{\tau}_{fb} = - \tensor[_b]{\bm{I}}{_r} \left(\bm{K}_p \bm{e} + \bm{K}_d \dot{\bm{e}}\right) - \tensor[_b]{\bm{\omega}}{_r} \times \left( \tensor[_b]{\bm{I}}{_r} \tensor[_b]{\bm{\omega}}{_r}\right).
 \end{equation}}
-Projecting the moment $\bm{\tau}_{fb}$ onto the flywheel axes with $\bm{C}^T$, we obtain the control action $\bm{u}$
+Projecting the moment $\bm{\tau}_{fb}$ onto the flywheel axes with $\bm{C}^T$, the control action $\bm{u}$ \MF{yields}
 \begin{equation}
 \label{eq:ctrl_law}
 \bm{u} = \bm{C}^T \bm{\tau}_{fb}.
@@ -435,10 +435,14 @@ Projecting the moment $\bm{\tau}_{fb}$ onto the flywheel axes with $\bm{C}^T$, w
 
 \section{Results of Simulations}
 \label{sec:simulations}
-To validate our \gls{ocs}, we present three simulations on different scenarios. We want to test the capability of the proposed approach to: 
+To validate our \gls{ocs}, three simulations on different scenarios \MF{are reported}. \MF{The authors} want to test the capability of the proposed approach to: 
 reject a disturbance when the robot is in the flight phase of a jump, damp trunk oscillations after the touch-down, 
 and work in parallel with the joints of the legs to achieve a highly dynamic motion. 
-All the simulations are performed using \MF{ROS \cite{quigley2009ros} together with Gazebo \cite{koenig2004design}. Physics related parameters are reported in Table \ref{tab:pys_param}.} The robot full dynamics is modeled with Pinocchio \cite{carpentier2019pinocchio}. The references for the joints of the legs are computed off-line using Crocoddyl \cite{mastalli2020crocoddyl} and tracked with a proportional-derivative joint controller. The \gls{ocs} is commanded to track base orientation references using the control law introduced in Subsection \ref{subsec:control_law} \MF{coded in Python}.\footnote{The video with all the simulations is available at web link \url{https://www.dropbox.com/scl/fo/wevvl0zvfp8gofie6x7rw/h?dl=0&rlkey=pap76cr813a0skrvrxl7qgrb9}.}
+All the simulations are performed using \MF{ROS \cite{quigley2009ros} together with Gazebo \cite{koenig2004design}. Physics related parameters are reported in Table \ref{tab:pys_param}.} \MF{References for the joints of the legs are computed off-line using Crocoddyl, an optimal control library for robots based on \gls{ddp} algorithms. It uses Pinocchio for fast computation of robots dynamics and their analytical derivatives. References $\bm{q}_{ref}$, $\dot{\bm{q}}_{ref}$ and $\bm{\tau}_{ref}$ for joint positions, velocities and torques are then executed on-line with a proportional-derivative joint controller:
+\begin{equation}
+\bm{\tau}_j = \bm{K}_{p,\, j} (\bm{q}_{ref} - \bm{q}) + \bm{K}_{d,\, j} (\dot{\bm{q}}_{ref} - \dot{\bm{q}}) + \bm{\tau}_{ref}
+\end{equation}
+} The \gls{ocs} is commanded to track base orientation references using the control law introduced in Subsection \ref{subsec:control_law} \MF{coded in Python}.\footnote{The video with all the simulations is available at web link \url{https://www.dropbox.com/scl/fo/wevvl0zvfp8gofie6x7rw/h?dl=0&rlkey=pap76cr813a0skrvrxl7qgrb9}.}
 
 \begin{table}[t!] 
 	\caption{\MF{Physics related parameters used for simulate the robot dynamics in Gazebo}}
@@ -497,12 +501,11 @@ using the flywheels %pairing the legs joint PD controller with \ref{eq:ctrl_law}
 it is possible to drive the robot to a safe configuration after the landing (Fig. \ref{fig:fw_jump}), without need to implement of a specific landing strategy, as the one in \cite{jeon2021real}.
 
 
-In the second test, we demonstrate the ability of the \gls{ocs} to reorient the base.
-We let the robot fall from a height of $1 \ \mathrm{m}$ with an initial pitch orientation of $30^\circ$ and zero base angular velocity.
-If we do not actuate the flywheels, the robot touches the ground with the same initial orientation and the trunk oscillates. If the \gls{ocs} is enabled, it drives the robot base to be horizontal when it is still in the air and the oscillations after the touch-down are drastically reduced, both in the pitch angle and forward direction (Fig. \ref{fig:fall_plot}).
+\MF{The second test demonstrates} the ability of the \gls{ocs} to reorient the base.
+\MF{The robot is falling} from a height of $1.0 \ \mathrm{m}$ with an initial pitch orientation of $30^\circ$ and zero base angular velocity.
+\MF{If the flywheels are not actuated}, the robot touches the ground with the same initial orientation and the trunk oscillates. If the \gls{ocs} is enabled, it drives the robot base to be horizontal when it is still in the air and the oscillations after the touch-down are drastically reduced, both in the pitch angle and forward direction (Fig. \ref{fig:fall_plot}).
 
-
-Finally, we demonstrate how flywheels can alleviate the effort of the leg joints to achieve a highly dynamic motion: a back-flip (Fig. \ref{fig:backflip}). 
+\MF{Finally, the ability of the flywheels to relieve the effort on the leg joints to achieve a highly dynamic movement is shown with a back-flip} (Fig. \ref{fig:backflip}). 
 For this, we target a space application carrying out a simulation with \MF{lunar gravity acceleration} ($1.62 \ \mathrm{m/s^2}$).
 In this way, it is possible to obtain high jumps with a long flight phase, without having to select more powerful actuators.  
 The leg joint trajectory computed off-line describes a purely vertical jump of $1 \ \mathrm{m}$, having a flight phase that lasts $2 \ \mathrm{s}$.
@@ -512,22 +515,15 @@ For this maneuver, the value of the incident angle $\alpha$ is set to $0^\circ$ 
 Our hardware design allows the manual change of this value before performing the task.
 This simulation demonstrates that the \gls{ocs} alleviate the effort to be applied on the legs: indeed, that it would not have been possible to do a back-flip without the flywheels because the legs are used only to achieve the linear motion. 
 
-
-
 \section{Conclusions}
 \label{sec:conclusions}
 
-In this work, we have presented the design of a novel \gls{ocs}, composed of two flywheels, that enables to control the trunk of a legged robot platform, 
-increasing the accuracy of aerial maneuvers during the under-actuated phases (i.e. flight phase) as well as 
-enhancing stability when in contact by damping oscillations.
-The novelty of the design, that involves the flywheels to be attached with incident rotational axes on the trunk, allows to control the orientation
-in both the roll and pitch directions while keeping the device compact. Their effect is optimized considering the inertial property of the mechanical structure. 
-Several simulations are reported with the quadruped Solo12 that demonstrate the effectiveness of the proposed approach to: 
-reject disturbances during the flight phase, stabilize the platform after the touch-down even in absence of a specific landing strategy and 
-achieve a fast reorientation maneuver (a back-flip) in a reduced gravity environment. 
+\MF{This work presented} the design of a novel \gls{ocs}, composed of two flywheels, that enables to control the trunk of a legged robot platform, increasing the accuracy of aerial maneuvers during the under-actuated phases (i.e. flight phase) as well as enhancing stability when in contact by damping oscillations. The novelty of the design, that involves the flywheels to be attached with incident rotational axes on the trunk, allows to control the orientation in both the roll and pitch directions while keeping the device compact. Their effect is optimized considering the inertial property of the mechanical structure. Several simulations are reported with the quadruped Solo12 that demonstrate the effectiveness of the proposed approach to: reject disturbances during the flight phase, stabilize the platform after the touch-down even in absence of a specific landing strategy and achieve a fast reorientation maneuver (a back-flip) in a reduced gravity environment. 
 
-In future works, we plan to demonstrate our concept performing experiment with the real platform. The control strategy for defining the base desired angular velocity can be improved using \gls{nmpc}, that takes into consideration the future samples of the orientation reference.
-We expect this feature will allows the stabilization of the yaw to a desired value, that if it is not locally controllable, enhancing the non-holonomy property of the angular momentum, i.e. doing a preliminary roll and pitch maneuver. 
+\MF{Possible applications of the presented \gls{ocs} include but are not limited to efficiently adjust the posture of quadruped robots walking or jumping on uneven terrains. As proved in the third simulation (back-flip), our approach improves the capabilities of quadrupeds in space application enabling fast locomotion by means of leaps, ensuring a reactive control action on the robot angular momentum. Furthermore, the method presented in Section 3 for designing the OCS does not depend on the specific platform, thus it can be replicated for reorienting mechanical structures with different morphology, e.g, monopods or bipeds. A construction worker's backpack can contain two flywheels with incident rotation axes: in the event of a fall from scaffolding, they can be used to reorient the human body to avoid impact of the head with the ground with the same controller proposed in this work.}
+
+In future works, \MF{the authors} plan to demonstrate our concept performing experiment with the real platform. The control strategy for defining the base desired angular velocity can be improved using \gls{nmpc}, that takes into consideration the future samples of the orientation reference.
+\MF{This feature is expected to allow} the stabilization of the yaw to a desired value, that if it is not locally controllable, enhancing the non-holonomy property of the angular momentum, i.e. doing a preliminary roll and pitch maneuver. 
 A control strategy that may lead to the same result is dynamic feedback linearization, widely used for flight with quadricopters.
 
 
@@ -575,6 +571,7 @@ DoF & Degree of Freedom\\
 CoM & Center Of Mass\\
 OCS & Orientation Control System\\
 CMG & Control Moment Gyroscope\\
+\MF{DDP} & \MF{Differential Dynamic Programming}\\
 NMPC & Nonlinear Model Predictive Control
 \end{tabular}
 }

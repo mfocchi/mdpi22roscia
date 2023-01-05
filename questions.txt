@@ -11,7 +11,7 @@ A2. Ho aumentato le reference (certe erano state tolte per humanoids e ne ho mes
 Q3. Standardisation of literature input (into one style)
 A3. Già era in uso il formato di mdpi sensors. Se non gli piace sto formato io non so che fare...
 
-Q4. The authors should give more details regardin the next sentence, being crucial for the paper outputs: "The robot full dynamics is modeled with Pinocchio". [...] Sinche the simulator models the robot dynamics, why use Pinocchio software?
+Q4. The authors should give more details regardin the next sentence, being crucial for the paper outputs: "The robot full dynamics is modeled with Pinocchio". [...] Since the simulator models the robot dynamics, why use Pinocchio software?
 A4. 
 
 Q5. Ide for robot code development
