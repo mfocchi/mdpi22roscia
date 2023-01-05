@@ -173,12 +173,10 @@ $^{3}$ \quad Department of Information Engineering and Computer Science (DISI), 
 \begin{document}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Dear Ms. Vera Popovic,\\
-Thank you for giving us the chance to submit a revised draft version of the manuscript titled "Orientation Control System: Enhancing Aerial Maneuvers for Quadruped Robots" to the MDPI journal \textit{Sensors}. We are grateful for the time and the effort you and the reviewers have dedicated to providing insightful comments on the original manuscript. We have incorporated changes to reflect most of the provided suggestions: they are highlighted in red within the manuscript. For removing the highlights, please comment line 73 and uncomment line 74 in the file named \texttt{mdpi2022roscia.tex}.\\
-Here is a point-by-point response to the reviewers' comments and concerns.
+Dear Reviewer,\\
+Thank you for giving us the chance to submit a revised draft version of the manuscript titled "Orientation Control System: Enhancing Aerial Maneuvers for Quadruped Robots" to the MDPI journal \textit{Sensors}. We are grateful for the time and the effort you and the other reviewers have dedicated to providing insightful comments on the original manuscript. We have incorporated changes to reflect most of the provided suggestions: they are highlighted in red within the manuscript. For removing the highlights, please comment line 73 and uncomment line 74 in the file named \texttt{mdpi2022roscia.tex}.\\
+Here is a point-by-point response to your comments and concerns.
 
-
-\section*{Comments for Reviewer 1}
 \begin{itemize}
 	\item \textbf{Comment 1:} \textit{Extend the text of the manuscript (e.g. introduction or conclusion) with specific results in the world and Europe, - Improve the quality of the paper by presenting the results of publications by researchers and experts who are involved in this field and registered in world databases (wos). These are e.g: Measurement of industrial robot pose repeatability, Investigation of snake robot locomotion possibilities in a pipe, thanks.}
 	\item[] \textbf{Response:} Thank you for this advice. However, in the case of our study, it seems slightly out of range because we tackle of the angular dynamics of the main body of a quadruped robot, that is observable.	\\
@@ -193,41 +191,6 @@ Here is a point-by-point response to the reviewers' comments and concerns.
 	\item \textbf{Comment 6:} \textit{Standardization of literature input (into one style)}
 	\item[] \textbf{Response:} Agree. We have corrected the literature input.\\
 \end{itemize}
-
-\section*{Comments for Reviewer 2}
-\begin{itemize}
-	\item \textbf{Comment 1:} \textit{'All the simulations are performed in Gazebo'. The paper must have more details related with the simulation, including a snapshot of the simulated robot in its environment.}
-	\item[] \textbf{Response:} Thank you for the insightful comment. We summarized the details of the simulation in \ref{tab:pys_param}, which is incorporated to the manuscript too. Moreover, inspired by your suggestion, we attached a sequence of snapshots for the third simulation (back-flip), showing the robot in the Gazebo environment.
-	\begin{table}[H] 
-		\caption{Physics related parameters used for simulate the robot dynamics in Gazebo}
-		\label{tab:pys_param}
-		\newcolumntype{C}{>{\centering\arraybackslash}X}
-		\begin{tabularx}{\textwidth}{CC}
-			\toprule
-			\textbf{Parameter} & \textbf{Value} \\
-			\midrule
-			Step size & $0.001 \ \mathrm{s}$\\
-			Real time update rate & $250$ \\
-			Physics engine & Open Dynamics Engine (ODE) \\
-			Solver & Quick (Projected Gauss-Seidel method)\\
-			Iterations & $50$\\
-			Successive Over Relaxation parameter & $1.3$\\
-			Rescaling Moment of Inertia  & no \\
-			Friction model & Pyramid \\		
-			\bottomrule	\end{tabularx}
-	\end{table} 
-	\item \textbf{Comment 2:} \textit{The authors should give more details regarding the next sentence, being crucial for the paper outputs: "The robot full dynamics is modeled with Pinocchio". Currently Gazebo supports 4 physics engines: ode, bullet, simbody and dart, being the default physics engine ode. Since the simulator models the robot dynamics, why use Pinocchio software?}
-	\item[] \textbf{Response:} We acknowledge that we could have made a better explanation here. We rephrased "The robot full dynamics is modeled with Pinocchio. The references for the joints of the legs are computed off-line using Crocoddyl and tracked with a proportional-derivative joint controller." with "References for the joints of the legs are computed off-line using Crocoddyl, an optimal control library for robots based on Differential Dynamic Programming (DDP) algorithms. It uses Pinocchio for fast computation of robots dynamics and their analytical derivatives. References $\bm{q}_{ref}$, $\dot{\bm{q}}_{ref}$ and $\bm{\tau}_{ref}$ for joint positions, velocities and torques are then executed on-line with a proportional-derivative joint controller:
-	\begin{equation*}
-	\bm{\tau}_j = \bm{K}_{p,\, j} (\bm{q}_{ref} - \bm{q}) + \bm{K}_{d,\, j} (\dot{\bm{q}}_{ref} - \dot{\bm{q}}) + \bm{\tau}_{ref}"
-	\end{equation*}
-	\item \textbf{Comment 3:} \textit{ Section 2 should be expanded with more citations, an describing more related works.}
-	\item[] \textbf{Response:} Thank you for the suggestion. Reviewer 1 pointed out the same advise, then you could refer to the response to Comment 5 of the the previous section. 
-	\item \textbf{Comment 4:} \textit{Ide for robot code development}
-	\item[] \textbf{Response:} We coded the controller using Python v3.8, with the IDE Pycharm v3.2 (\url{https://www.jetbrains.com/pycharm/}). The manuscript lacks about this information because we believe that, in our work, the use of a specific IDE is not relevant.
-\end{itemize}
-\vspace{12 pt} 
-
 In addition to the above observations, all orthographic and grammatical errors mentioned have been corrected. \\
 We look forward to hear regarding our submission and to respond to any further questions and comments.\\
 Sincerely,
