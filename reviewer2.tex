@@ -179,7 +179,13 @@ Here is a point-by-point response to your comments and concerns.
 
 \begin{itemize}
 	\item \textbf{Comment 1:} \textit{'All the simulations are performed in Gazebo'. The paper must have more details related with the simulation, including a snapshot of the simulated robot in its environment.}
-	\item[] \textbf{Response:} Thank you for the insightful comment. We summarized the details of the simulation in \ref{tab:pys_param}, which is incorporated to the manuscript too. Moreover, inspired by your suggestion, we attached a sequence of snapshots for the third simulation (back-flip), showing the robot in the Gazebo environment.
+	\item[] \textbf{Response:} Thank you for the insightful comment. We summarized the details of the simulation in Table \ref{tab:pys_param}, which is incorporated to the manuscript too. Moreover, inspired by your suggestion, we attached a sequence of snapshots for the third simulation (back-flip), showing the robot in the Gazebo environment (Fig. \ref{fig:backflip})
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=\linewidth]{figures/backflip.png}
+		\caption{\small Third Test: sequence of snapshots of Solo12 performing a back-flip in Gazebo environment. The \gls{ocs} alleviates the effort requested to the leg joints, that in this case can be used to accomplish only the vertical motion. The red, green and blue lines represent the axes of the inertial (world) reference frame.}
+		\label{fig:backflip}
+	\end{figure}
 	\begin{table}[H] 
 		\caption{Physics related parameters used for simulate the robot dynamics in Gazebo}
 		\label{tab:pys_param}
